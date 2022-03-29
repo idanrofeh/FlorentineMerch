@@ -2,6 +2,7 @@ export function ControlBox({
   orderData,
   handleCanvasChange,
   handleOrderChange,
+  handlePrintChange,
 }) {
   const { numOfItems, canvas, notes, priceForOne } = orderData;
   return (
@@ -13,7 +14,7 @@ export function ControlBox({
           name="frontPrint"
           accept="image/png, image/jpg, image/jpg"
           required
-          onChange={handleCanvasChange}
+          onChange={handlePrintChange}
         />
       </div>
       <label className="field num">
@@ -26,14 +27,14 @@ export function ControlBox({
         />
         <span>:מספר פריטים</span>
       </label>
-      {/* <label className="field shirt-type">
+      <label className="field shirt-type">
         <select name="item" value={canvas.item} onChange={handleCanvasChange}>
           <option value="short">שרוול קצר</option>
           <option value="hoodie">קפוצ'ון</option>
           <option value="long">שרוול ארוך</option>
         </select>
         <span>:סוג פריט</span>
-      </label> */}
+      </label>
       <label className="field item-color">
         <input
           type="color"

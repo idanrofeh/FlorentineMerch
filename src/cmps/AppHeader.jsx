@@ -5,8 +5,8 @@ export function AppHeader() {
     <section className="app-header">
       <NavLink to="/" className="logo">
         <img
-          height={90}
-          width={220}
+          height={80}
+          width={150}
           src="https://res.cloudinary.com/dc6ailej1/image/upload/v1648519937/d49077fa_1_wk9qir.png"
         />
       </NavLink>

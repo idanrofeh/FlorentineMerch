@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 import { Canvas } from "../cmps/Canvas.jsx";
 import { ControlBox } from "../cmps/ControlBox.jsx";
@@ -34,9 +35,25 @@ export function Home() {
     const { name } = target;
     let { value } = target;
     const updatedCanvas = { ...order.canvas, [name]: value };
-    console.log(updatedCanvas);
     const updatedOrder = { ...order, canvas: updatedCanvas };
     setOrder(updatedOrder);
+  };
+
+  const handlePrintChange = async ({ target }) => {
+    const { files } = target;
+    const file = files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "zbxbp7ja");
+    const { data } = await axios.post(
+      "https://api.cloudinary.com/v1_1/dc6ailej1/image/upload",
+      formData
+    );
+    const { url } = data;
+    console.log(url);
+    const frontPrint = { url };
+    const updatedCanvas = { ...order.canvas, frontPrint };
+    setOrder({ ...order, canvas: updatedCanvas });
   };
 
   if (!order) return <span>Loading..</span>;
@@ -48,6 +65,7 @@ export function Home() {
           orderData={order}
           handleCanvasChange={handleCanvasChange}
           handleOrderChange={handleOrderChange}
+          handlePrintChange={handlePrintChange}
         />
       </div>
     </section>
