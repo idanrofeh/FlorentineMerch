@@ -9,9 +9,23 @@ export function Canvas({ canvasData }) {
     shirtImg.onload = () => {
       setImg(shirtImg);
     };
-    shirtImg.src =
-      "https://res.cloudinary.com/dc6ailej1/image/upload/v1648500864/newtshirt_f4601y.png";
-  }, []);
+    switch (canvasData.item) {
+      case "short":
+        shirtImg.src =
+          "https://res.cloudinary.com/dc6ailej1/image/upload/v1648500864/newtshirt_f4601y.png";
+        break;
+      case "hoodie":
+        shirtImg.src =
+          "https://res.cloudinary.com/dc6ailej1/image/upload/v1648522551/58e38d12204d556bbd97b164_c5nc5r.png";
+        break;
+      case "long":
+        shirtImg.src =
+          "https://res.cloudinary.com/dc6ailej1/image/upload/v1648522551/58e38d12204d556bbd97b164_c5nc5r.png";
+        break;
+      default:
+        return;
+    }
+  }, [canvasData]);
 
   useEffect(() => {
     if (img && canvas) {

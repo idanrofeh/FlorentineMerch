@@ -24,16 +24,16 @@ export function ControlBox({
           value={numOfItems}
           onChange={handleOrderChange}
         />
-        :מספר פריטים
+        <span>:מספר פריטים</span>
       </label>
-      <label className="field shirt-type">
+      {/* <label className="field shirt-type">
         <select name="item" value={canvas.item} onChange={handleCanvasChange}>
           <option value="short">שרוול קצר</option>
           <option value="hoodie">קפוצ'ון</option>
           <option value="long">שרוול ארוך</option>
         </select>
-        :סוג פריט
-      </label>
+        <span>:סוג פריט</span>
+      </label> */}
       <label className="field item-color">
         <input
           type="color"
@@ -41,7 +41,7 @@ export function ControlBox({
           value={canvas["item-color"]}
           onChange={handleCanvasChange}
         />
-        <span>:צבע פריט</span>
+        <span>:צבע פריט 🎨</span>
       </label>
       <textarea
         name="notes"

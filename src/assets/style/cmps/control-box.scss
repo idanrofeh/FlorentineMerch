@@ -1,6 +1,6 @@
 .control-box {
   height: 400px;
-  background-color: burlywood;
+  background-color: #a5b2a8;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -11,22 +11,34 @@
 
   .file-block {
     padding: 10px;
-    width: 240px;
+    width: 90%;
     border-radius: 8px;
-    border-color: rgb(202, 101, 5);
+    border-color: #775b41;
     border-style: solid;
     display: flex;
     flex-direction: column;
     margin-bottom: 40px;
     span {
       margin-bottom: 10px;
+      font-weight: 700;
+      text-decoration: underline;
     }
     input {
-      margin-left: 20px;
+      margin-left: 30px;
     }
   }
   .field {
     margin: 10px;
+    span {
+      margin-left: 10px;
+    }
+    input,
+    select {
+      font-family: inherit;
+      margin-left: 20px;
+      border-radius: 4px;
+      border-style: solid;
+    }
   }
   .num {
     input {
@@ -34,6 +46,11 @@
     }
   }
   textarea {
+    padding: 6px;
+    resize: none;
+    border-radius: 8px;
+    text-align: right;
+    font-family: inherit;
     margin-top: 40px;
     width: 200px;
     height: 80px;

@@ -42,12 +42,14 @@ export function Home() {
   if (!order) return <span>Loading..</span>;
   return (
     <section className="home page">
-      <Canvas canvasData={order.canvas} />
-      <ControlBox
-        orderData={order}
-        handleCanvasChange={handleCanvasChange}
-        handleOrderChange={handleOrderChange}
-      />
+      <div className="order-container">
+        <Canvas canvasData={order.canvas} />
+        <ControlBox
+          orderData={order}
+          handleCanvasChange={handleCanvasChange}
+          handleOrderChange={handleOrderChange}
+        />
+      </div>
     </section>
   );
 }

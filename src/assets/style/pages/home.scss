@@ -3,4 +3,17 @@
   justify-content: center;
   align-items: center;
   display: flex;
+  font-family: "Varela Round", sans-serif;
+  .order-container {
+    width: 95vw;
+    max-width: 730px;
+    border-radius: 30px;
+    border-width: 3.6px;
+    border-color: black;
+    border-style: solid;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+  }
 }
