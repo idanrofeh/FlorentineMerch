@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+
+import { orderService } from "../services/order.service.js";
 
 import { Canvas } from "../cmps/Canvas.jsx";
 import { ControlBox } from "../cmps/ControlBox.jsx";
 
 export function Home() {
   const [order, setOrder] = useState(null);
+  const [isFront, setIsFront] = useState(true);
 
   useEffect(() => {
     setOrder(newOrder);
@@ -41,31 +43,28 @@ export function Home() {
 
   const handlePrintChange = async ({ target }) => {
     const { files } = target;
-    const file = files[0];
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "zbxbp7ja");
-    const { data } = await axios.post(
-      "https://api.cloudinary.com/v1_1/dc6ailej1/image/upload",
-      formData
-    );
-    const { url } = data;
-    console.log(url);
-    const frontPrint = { url };
+    const [print] = files;
+    const { url } = await orderService.uploadPrint(print);
+    const frontPrint = { url, x: 145, y: 120, width: 100, height: 100 };
     const updatedCanvas = { ...order.canvas, frontPrint };
     setOrder({ ...order, canvas: updatedCanvas });
+  };
+
+  const toggleIsFront = () => {
+    setIsFront(!isFront);
   };
 
   if (!order) return <span>Loading..</span>;
   return (
     <section className="home page">
       <div className="order-container">
-        <Canvas canvasData={order.canvas} />
+        <Canvas canvasData={order.canvas} isFront={isFront} />
         <ControlBox
           orderData={order}
           handleCanvasChange={handleCanvasChange}
           handleOrderChange={handleOrderChange}
           handlePrintChange={handlePrintChange}
+          toggleIsFront={toggleIsFront}
         />
       </div>
     </section>

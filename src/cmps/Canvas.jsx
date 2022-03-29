@@ -6,6 +6,7 @@ export function Canvas({ canvasData }) {
   const canvas = useRef(null);
 
   useEffect(() => {
+    //Setting imgs
     const shirtImg = new Image();
     shirtImg.onload = () => {
       setImg(shirtImg);
@@ -37,6 +38,7 @@ export function Canvas({ canvasData }) {
 
   useEffect(() => {
     if (img && canvas) {
+      //Draw shirt
       const ctx = canvas.current.getContext("2d");
       ctx.globalCompositeOperation = "copy";
       ctx.clearRect(0, 0, 400, 400);
@@ -45,8 +47,12 @@ export function Canvas({ canvasData }) {
       ctx.fillStyle = canvasData["item-color"];
       ctx.fillRect(0, 0, 400, 400);
       if (print) {
+        //Draw print
+        const { frontPrint } = canvasData;
+        const { x, y, height, width } = frontPrint;
+        console.log(x, height);
         ctx.globalCompositeOperation = "source-over";
-        ctx.drawImage(print, 150, 100, 100, 100);
+        ctx.drawImage(print, x, y, height, width);
       }
     }
   }, [img, canvas, canvasData, print]);
