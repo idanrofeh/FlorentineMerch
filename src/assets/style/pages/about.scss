@@ -1,0 +1,10 @@
+.about {
+  display: flex;
+  flex-direction: column;
+  padding: 0.9rem;
+  text-align: center;
+  .title {
+    margin: 0;
+    margin-bottom: 20px;
+  }
+}
