@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTransition, animated } from "react-spring";
 
 import { imgService } from "../services/img.service.js";
 
@@ -12,6 +13,11 @@ export function Home() {
   useEffect(() => {
     setOrder(newOrder);
   }, []);
+
+  // const frontTransition = useTransition(isFront, {
+  //   from: { x: 2000 },
+  //   leave: { x: 2000 },
+  // });
 
   const newOrder = {
     numOfItems: 1,
@@ -33,7 +39,7 @@ export function Home() {
     setOrder(updatedOrder);
   };
 
-  const handleCanvasChange = ({ target }) => {
+  const handleItemChange = ({ target }) => {
     const { name } = target;
     let { value } = target;
     const updatedCanvas = { ...order.canvas, [name]: value };
@@ -45,15 +51,15 @@ export function Home() {
     const { files } = target;
     const [print] = files;
     const { url } = await imgService.uploadPrint(print);
-    const frontPrint = { url, type: "normal" };
+    const frontPrint = { ...order.canvas.frontPrint, url };
     const updatedCanvas = { ...order.canvas, frontPrint };
     setOrder({ ...order, canvas: updatedCanvas });
   };
 
-  const changePrintType = ({ target }) => {
-    const { value } = target;
-    const frontPrint = { ...order.canvas.frontPrint, type: value };
-    const newCanvas = { ...order.canvas, frontPrint };
+  const handlePrintChange = ({ target }, side) => {
+    const { name, value } = target;
+    const currPrint = { ...order.canvas[side], [name]: value };
+    const newCanvas = { ...order.canvas, [side]: currPrint };
     setOrder({ ...order, canvas: newCanvas });
   };
 
@@ -64,17 +70,52 @@ export function Home() {
   if (!order) return <span>Loading..</span>;
   return (
     <section className="home page">
-      <div className="order-container">
-        <Canvas canvasData={order.canvas} />
-        <ControlBox
-          orderData={order}
-          handleCanvasChange={handleCanvasChange}
-          handleOrderChange={handleOrderChange}
-          handleFileChange={handleFileChange}
-          toggleIsFront={toggleIsFront}
-          changePrintType={changePrintType}
-        />
-      </div>
+      {isFront && (
+        <div className="order-editor">
+          <Canvas canvasData={order.canvas} side="front" />
+          <ControlBox
+            side="front"
+            orderData={order}
+            handleItemChange={handleItemChange}
+            handleOrderChange={handleOrderChange}
+            handleFileChange={handleFileChange}
+            toggleIsFront={toggleIsFront}
+            handlePrintChange={handlePrintChange}
+          />
+        </div>
+      )}
+      {/* {frontTransition((style, item) =>
+        item ? (
+          <animated.div className="order-editor" style={style}>
+            <Canvas canvasData={order.canvas} side="front" />
+            <ControlBox
+              side="front"
+              orderData={order}
+              handleItemChange={handleItemChange}
+              handleOrderChange={handleOrderChange}
+              handleFileChange={handleFileChange}
+              toggleIsFront={toggleIsFront}
+              handlePrintChange={handlePrintChange}
+            />
+          </animated.div>
+        ) : (
+          ""
+        )
+      )} */}
+      {!isFront && (
+        <div className="order-editor">
+          <Canvas canvasData={order.canvas} side="back" />
+          <ControlBox
+            side="back"
+            orderData={order}
+            handleItemChange={handleItemChange}
+            handleOrderChange={handleOrderChange}
+            handleFileChange={handleFileChange}
+            toggleIsFront={toggleIsFront}
+            handlePrintChange={handlePrintChange}
+          />
+        </div>
+      )}
     </section>
   );
 }

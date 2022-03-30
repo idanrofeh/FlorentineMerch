@@ -2,16 +2,17 @@ import { ColorBtn } from "./ColorBtn.jsx";
 
 export function ControlBox({
   orderData,
-  handleCanvasChange,
+  handleItemChange,
   handleOrderChange,
   handleFileChange,
-  changePrintType,
+  handlePrintChange,
   toggleIsFront,
+  side,
 }) {
   const { numOfItems, canvas, notes, priceForOne } = orderData;
 
   const changeItemColor = (color) => {
-    handleCanvasChange({ target: { name: "item-color", value: color } });
+    handleItemChange({ target: { name: "item-color", value: color } });
   };
 
   const itemColors = [
@@ -39,9 +40,9 @@ export function ControlBox({
       </div>
       <label className="field print-type">
         <select
-          name="print-type"
-          value={canvas.frontPrint.type}
-          onChange={changePrintType}
+          name="type"
+          value={canvas[side + "Print"].type}
+          onChange={(ev) => handlePrintChange(ev, side + "Print")}
         >
           <option value="normal">רגיל</option>
           <option value="big">גדול</option>
@@ -60,7 +61,7 @@ export function ControlBox({
         <span>:מספר פריטים</span>
       </label>
       <label className="field shirt-type">
-        <select name="item" value={canvas.item} onChange={handleCanvasChange}>
+        <select name="item" value={canvas.item} onChange={handleItemChange}>
           <option value="short">שרוול קצר</option>
           <option value="hoodie">קפוצ'ון</option>
           <option value="long">שרוול ארוך</option>
@@ -77,6 +78,15 @@ export function ControlBox({
           />
         ))}
       </div>
+
+      <button
+        onClick={(ev) => {
+          ev.preventDefault();
+          toggleIsFront();
+        }}
+      >
+        החלף צד 🔄
+      </button>
       <textarea
         name="notes"
         className="field notes"

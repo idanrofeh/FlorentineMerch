@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 
 import { imgService } from "../services/img.service";
 
-export function Canvas({ canvasData }) {
+export function Canvas({ canvasData, side }) {
   const [img, setImg] = useState(null);
   const [print, setPrint] = useState(null);
   const canvas = useRef(null);
@@ -30,7 +30,8 @@ export function Canvas({ canvasData }) {
     shirtImg.onload = () => {
       setImg(shirtImg);
     };
-    shirtImg.src = imgService.itemURLs[item];
+    const itemsStr = side + "ItemURLs";
+    shirtImg.src = imgService[itemsStr][item];
   };
 
   const setPrintImg = (url) => {
@@ -51,8 +52,8 @@ export function Canvas({ canvasData }) {
   };
 
   const drawPrint = (ctx) => {
-    const { frontPrint } = canvasData;
-    const { type } = frontPrint;
+    const currPrint = canvasData[side + "Print"];
+    const { type } = currPrint;
     ctx.globalCompositeOperation = "source-over";
     switch (type) {
       case "normal":
