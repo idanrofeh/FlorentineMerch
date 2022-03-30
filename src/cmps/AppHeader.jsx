@@ -12,7 +12,13 @@ export function AppHeader() {
       </NavLink>
       <div className="header-nav">
         <NavLink className="header-btn" to="/about">
-          About
+          צור קשר
+        </NavLink>
+        <NavLink className="header-btn" to="/cart">
+          עגלה
+        </NavLink>
+        <NavLink className="header-btn" to="/">
+          הזמנה חדשה
         </NavLink>
       </div>
     </section>

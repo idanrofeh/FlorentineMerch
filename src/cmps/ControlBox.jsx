@@ -3,6 +3,8 @@ export function ControlBox({
   handleCanvasChange,
   handleOrderChange,
   handlePrintChange,
+  isFront,
+  toggleIsFront,
 }) {
   const { numOfItems, canvas, notes, priceForOne } = orderData;
   return (

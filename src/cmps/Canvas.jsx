@@ -1,61 +1,61 @@
 import { useState, useEffect, useRef } from "react";
 
-export function Canvas({ canvasData }) {
+import { imgService } from "../services/img.service";
+
+export function Canvas({ canvasData, isFront }) {
   const [img, setImg] = useState(null);
   const [print, setPrint] = useState(null);
   const canvas = useRef(null);
 
   useEffect(() => {
-    //Setting imgs
-    const shirtImg = new Image();
-    shirtImg.onload = () => {
-      setImg(shirtImg);
-    };
-    switch (canvasData.item) {
-      case "short":
-        shirtImg.src =
-          "https://res.cloudinary.com/dc6ailej1/image/upload/v1648500864/newtshirt_f4601y.png";
-        break;
-      case "hoodie":
-        shirtImg.src =
-          "https://res.cloudinary.com/dc6ailej1/image/upload/v1648528448/kisspng-hoodie-t-shirt-sweater-top-october-s-very-own-5afdfb8d57ab65.9085175115265944453591_zqyuh9.png";
-        break;
-      case "long":
-        shirtImg.src =
-          "https://res.cloudinary.com/dc6ailej1/image/upload/v1648522611/kisspng-t-shirt-polo-shirt-clothing-top-neck-5ace24beb4ae37.3365356515234592627401_kgiz0l.png";
-        break;
-      default:
-        return;
-    }
-    if (canvasData.frontPrint) {
-      const printImg = new Image();
-      printImg.onload = () => {
-        setPrint(printImg);
-      };
-      printImg.src = canvasData.frontPrint.url;
+    const { item, frontPrint } = canvasData;
+    setBaseImg(item);
+    if (frontPrint) {
+      setPrintImg(frontPrint.url);
     }
   }, [canvasData]);
 
   useEffect(() => {
     if (img && canvas) {
-      //Draw shirt
       const ctx = canvas.current.getContext("2d");
-      ctx.globalCompositeOperation = "copy";
-      ctx.clearRect(0, 0, 400, 400);
-      ctx.drawImage(img, 20, 20, 350, 350);
-      ctx.globalCompositeOperation = "source-in";
-      ctx.fillStyle = canvasData["item-color"];
-      ctx.fillRect(0, 0, 400, 400);
+      drawShirt(ctx);
       if (print) {
-        //Draw print
-        const { frontPrint } = canvasData;
-        const { x, y, height, width } = frontPrint;
-        console.log(x, height);
-        ctx.globalCompositeOperation = "source-over";
-        ctx.drawImage(print, x, y, height, width);
+        drawPrint(ctx);
       }
     }
-  }, [img, canvas, canvasData, print]);
+  }, [img, canvasData, print]);
+
+  const setBaseImg = (item) => {
+    const shirtImg = new Image();
+    shirtImg.onload = () => {
+      setImg(shirtImg);
+    };
+    shirtImg.src = imgService.itemURLs[item];
+  };
+
+  const setPrintImg = (url) => {
+    const printImg = new Image();
+    printImg.onload = () => {
+      setPrint(printImg);
+    };
+    printImg.src = url;
+  };
+
+  const drawShirt = (ctx) => {
+    ctx.globalCompositeOperation = "copy";
+    ctx.clearRect(0, 0, 400, 400);
+    ctx.drawImage(img, 20, 20, 350, 350);
+    ctx.globalCompositeOperation = "source-in";
+    ctx.fillStyle = canvasData["item-color"];
+    ctx.fillRect(0, 0, 400, 400);
+  };
+
+  const drawPrint = (ctx) => {
+    const { frontPrint } = canvasData;
+    const { x, y, height, width } = frontPrint;
+    ctx.globalCompositeOperation = "source-over";
+    ctx.drawImage(print, x, y, height, width);
+  };
 
   return <canvas ref={canvas} height="400" width="400"></canvas>;
 }

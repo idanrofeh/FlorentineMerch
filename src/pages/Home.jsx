@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { orderService } from "../services/order.service.js";
+import { imgService } from "../services/img.service.js";
 
 import { Canvas } from "../cmps/Canvas.jsx";
 import { ControlBox } from "../cmps/ControlBox.jsx";
@@ -44,8 +44,8 @@ export function Home() {
   const handlePrintChange = async ({ target }) => {
     const { files } = target;
     const [print] = files;
-    const { url } = await orderService.uploadPrint(print);
-    const frontPrint = { url, x: 145, y: 120, width: 100, height: 100 };
+    const { url } = await imgService.uploadPrint(print);
+    const frontPrint = { url, x: 150, y: 90, width: 100, height: 100 };
     const updatedCanvas = { ...order.canvas, frontPrint };
     setOrder({ ...order, canvas: updatedCanvas });
   };
@@ -60,6 +60,7 @@ export function Home() {
       <div className="order-container">
         <Canvas canvasData={order.canvas} isFront={isFront} />
         <ControlBox
+          isFront={isFront}
           orderData={order}
           handleCanvasChange={handleCanvasChange}
           handleOrderChange={handleOrderChange}
