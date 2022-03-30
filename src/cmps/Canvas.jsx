@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 
 import { imgService } from "../services/img.service";
 
-export function Canvas({ canvasData, isFront }) {
+export function Canvas({ canvasData }) {
   const [img, setImg] = useState(null);
   const [print, setPrint] = useState(null);
   const canvas = useRef(null);
@@ -52,9 +52,21 @@ export function Canvas({ canvasData, isFront }) {
 
   const drawPrint = (ctx) => {
     const { frontPrint } = canvasData;
-    const { x, y, height, width } = frontPrint;
+    const { type } = frontPrint;
     ctx.globalCompositeOperation = "source-over";
-    ctx.drawImage(print, x, y, height, width);
+    switch (type) {
+      case "normal":
+        ctx.drawImage(print, 150, 100, 100, 100);
+        break;
+      case "big":
+        ctx.drawImage(print, 120, 100, 150, 180);
+        break;
+      case "pocket":
+        ctx.drawImage(print, 125, 100, 70, 70);
+        break;
+      default:
+        return;
+    }
   };
 
   return <canvas ref={canvas} height="400" width="400"></canvas>;

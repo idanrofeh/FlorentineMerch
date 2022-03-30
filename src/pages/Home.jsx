@@ -18,8 +18,8 @@ export function Home() {
     notes: null,
     priceForOne: 40,
     canvas: {
-      frontPrint: null,
-      backPrint: null,
+      frontPrint: { type: "normal" },
+      backPrint: { type: "normal" },
       "item-color": "black",
       item: "short",
     },
@@ -41,13 +41,20 @@ export function Home() {
     setOrder(updatedOrder);
   };
 
-  const handlePrintChange = async ({ target }) => {
+  const handleFileChange = async ({ target }) => {
     const { files } = target;
     const [print] = files;
     const { url } = await imgService.uploadPrint(print);
-    const frontPrint = { url, x: 150, y: 90, width: 100, height: 100 };
+    const frontPrint = { url, type: "normal" };
     const updatedCanvas = { ...order.canvas, frontPrint };
     setOrder({ ...order, canvas: updatedCanvas });
+  };
+
+  const changePrintType = ({ target }) => {
+    const { value } = target;
+    const frontPrint = { ...order.canvas.frontPrint, type: value };
+    const newCanvas = { ...order.canvas, frontPrint };
+    setOrder({ ...order, canvas: newCanvas });
   };
 
   const toggleIsFront = () => {
@@ -58,14 +65,14 @@ export function Home() {
   return (
     <section className="home page">
       <div className="order-container">
-        <Canvas canvasData={order.canvas} isFront={isFront} />
+        <Canvas canvasData={order.canvas} />
         <ControlBox
-          isFront={isFront}
           orderData={order}
           handleCanvasChange={handleCanvasChange}
           handleOrderChange={handleOrderChange}
-          handlePrintChange={handlePrintChange}
+          handleFileChange={handleFileChange}
           toggleIsFront={toggleIsFront}
+          changePrintType={changePrintType}
         />
       </div>
     </section>

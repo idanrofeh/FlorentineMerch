@@ -1,12 +1,30 @@
+import { ColorBtn } from "./ColorBtn.jsx";
+
 export function ControlBox({
   orderData,
   handleCanvasChange,
   handleOrderChange,
-  handlePrintChange,
-  isFront,
+  handleFileChange,
+  changePrintType,
   toggleIsFront,
 }) {
   const { numOfItems, canvas, notes, priceForOne } = orderData;
+
+  const changeItemColor = (color) => {
+    handleCanvasChange({ target: { name: "item-color", value: color } });
+  };
+
+  const itemColors = [
+    "black",
+    "green",
+    "red",
+    "blue",
+    "purple",
+    "white",
+    "grey",
+    "pink",
+  ];
+
   return (
     <form className="control-box">
       <div className="file-block">
@@ -16,9 +34,21 @@ export function ControlBox({
           name="frontPrint"
           accept="image/png, image/jpg, image/jpg"
           required
-          onChange={handlePrintChange}
+          onChange={handleFileChange}
         />
       </div>
+      <label className="field print-type">
+        <select
+          name="print-type"
+          value={canvas.frontPrint.type}
+          onChange={changePrintType}
+        >
+          <option value="normal">רגיל</option>
+          <option value="big">גדול</option>
+          <option value="pocket">כיס</option>
+        </select>
+        <span>:סוג גלופה</span>
+      </label>
       <label className="field num">
         <input
           type="number"
@@ -37,15 +67,16 @@ export function ControlBox({
         </select>
         <span>:סוג פריט</span>
       </label>
-      <label className="field item-color">
-        <input
-          type="color"
-          name="item-color"
-          value={canvas["item-color"]}
-          onChange={handleCanvasChange}
-        />
-        <span>:צבע פריט 🎨</span>
-      </label>
+      <span>:צבע פריט 🎨</span>
+      <div className="item-color field">
+        {itemColors.map((color) => (
+          <ColorBtn
+            key={color}
+            color={color}
+            changeItemColor={changeItemColor}
+          />
+        ))}
+      </div>
       <textarea
         name="notes"
         className="field notes"
