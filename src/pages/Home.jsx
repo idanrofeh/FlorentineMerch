@@ -62,36 +62,21 @@ export function Home() {
   };
 
   if (!order) return <span>Loading..</span>;
+  const side = isFront ? "front" : "back";
   return (
     <section className="home page">
-      {isFront && (
-        <div className="order-editor">
-          <Canvas canvasData={order.canvas} side="front" />
-          <ControlBox
-            side="front"
-            orderData={order}
-            handleItemChange={handleItemChange}
-            handleOrderChange={handleOrderChange}
-            handleFileChange={handleFileChange}
-            toggleIsFront={toggleIsFront}
-            handlePrintChange={handlePrintChange}
-          />
-        </div>
-      )}
-      {!isFront && (
-        <div className="order-editor">
-          <Canvas canvasData={order.canvas} side="back" />
-          <ControlBox
-            side="back"
-            orderData={order}
-            handleItemChange={handleItemChange}
-            handleOrderChange={handleOrderChange}
-            handleFileChange={handleFileChange}
-            toggleIsFront={toggleIsFront}
-            handlePrintChange={handlePrintChange}
-          />
-        </div>
-      )}
+      <div className="order-editor">
+        <Canvas canvasData={order.canvas} side={side} />
+        <ControlBox
+          side={side}
+          orderData={order}
+          handleItemChange={handleItemChange}
+          handleOrderChange={handleOrderChange}
+          handleFileChange={handleFileChange}
+          toggleIsFront={toggleIsFront}
+          handlePrintChange={handlePrintChange}
+        />
+      </div>
     </section>
   );
 }

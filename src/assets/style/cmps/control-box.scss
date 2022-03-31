@@ -1,4 +1,4 @@
-.control-box {
+.control-form {
   background-color: #a5b2a8;
   display: flex;
   flex-wrap: wrap;
@@ -68,7 +68,7 @@
 }
 
 @media only screen and (min-width: 650px) {
-  .control-box {
+  .control-form {
     height: 100%;
     width: 250px;
     font-size: 16px;

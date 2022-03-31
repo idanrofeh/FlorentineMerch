@@ -13,7 +13,7 @@ export function Canvas({ canvasData, side }) {
     if (frontPrint) {
       setPrintImg(frontPrint.url);
     }
-  }, [canvasData]);
+  }, [canvasData, side]);
 
   useEffect(() => {
     if (img && canvas) {
