@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useTransition, animated } from "react-spring";
 
 import { imgService } from "../services/img.service.js";
 
@@ -13,11 +12,6 @@ export function Home() {
   useEffect(() => {
     setOrder(newOrder);
   }, []);
-
-  // const frontTransition = useTransition(isFront, {
-  //   from: { x: 2000 },
-  //   leave: { x: 2000 },
-  // });
 
   const newOrder = {
     numOfItems: 1,
@@ -84,24 +78,6 @@ export function Home() {
           />
         </div>
       )}
-      {/* {frontTransition((style, item) =>
-        item ? (
-          <animated.div className="order-editor" style={style}>
-            <Canvas canvasData={order.canvas} side="front" />
-            <ControlBox
-              side="front"
-              orderData={order}
-              handleItemChange={handleItemChange}
-              handleOrderChange={handleOrderChange}
-              handleFileChange={handleFileChange}
-              toggleIsFront={toggleIsFront}
-              handlePrintChange={handlePrintChange}
-            />
-          </animated.div>
-        ) : (
-          ""
-        )
-      )} */}
       {!isFront && (
         <div className="order-editor">
           <Canvas canvasData={order.canvas} side="back" />

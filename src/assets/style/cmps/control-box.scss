@@ -1,23 +1,25 @@
 .control-box {
-  height: 400px;
   background-color: #a5b2a8;
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 10px;
-
+  font-size: 12px;
+  flex-grow: 1;
+  button {
+    border-radius: 8px;
+    background-color: white;
+  }
   .file-block {
     padding: 10px;
-    width: 90%;
     border-radius: 8px;
     border-color: #775b41;
     border-style: solid;
     display: flex;
     flex-direction: column;
-    margin-bottom: 40px;
+    margin-bottom: 0;
+    width: 210px;
     span {
       margin-bottom: 10px;
       font-weight: 700;
@@ -28,7 +30,7 @@
     }
   }
   .field {
-    margin: 10px;
+    margin: 5px;
     span {
       margin-left: 10px;
     }
@@ -62,5 +64,21 @@
     margin-top: 40px;
     width: 200px;
     height: 80px;
+  }
+}
+
+@media only screen and (min-width: 650px) {
+  .control-box {
+    height: 100%;
+    width: 250px;
+    font-size: 16px;
+    flex-direction: column;
+    .file-block {
+      margin-bottom: 20px;
+      width: 90%;
+    }
+    .field {
+      margin: 10px;
+    }
   }
 }

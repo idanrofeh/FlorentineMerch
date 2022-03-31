@@ -68,7 +68,7 @@ export function ControlBox({
         </select>
         <span>:סוג פריט</span>
       </label>
-      <span>:צבע פריט 🎨</span>
+      {/* <span>:צבע פריט 🎨</span> */}
       <div className="item-color field">
         {itemColors.map((color) => (
           <ColorBtn
