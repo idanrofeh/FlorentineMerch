@@ -8,12 +8,12 @@ export function Canvas({ canvasData, side }) {
   const canvas = useRef(null);
 
   useEffect(() => {
-    const { item, frontPrint } = canvasData;
+    const { item } = canvasData;
     setBaseImg(item);
-    if (frontPrint) {
-      setPrintImg(frontPrint.url);
-    }
-  }, [canvasData, side]);
+    if (canvasData[side + "Print"].url) {
+      setPrintImg(canvasData[side + "Print"].url);
+    } else setPrint(null);
+  }, [side, canvasData]);
 
   useEffect(() => {
     if (img && canvas) {
@@ -23,7 +23,7 @@ export function Canvas({ canvasData, side }) {
         drawPrint(ctx);
       }
     }
-  }, [img, canvasData, print]);
+  }, [img, canvasData, print, side]);
 
   const setBaseImg = (item) => {
     const shirtImg = new Image();

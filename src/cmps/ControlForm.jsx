@@ -15,13 +15,16 @@ export function ControlForm({
   return (
     <form className="control-form">
       <div className="file-block">
-        <span>:העלה קובץ</span>
+        <label htmlFor="file-upload" className="custom-file-upload">
+          העלה קובץ
+        </label>
         <input
+          id="file-upload"
           type="file"
-          name="frontPrint"
+          name={side + "Print"}
           accept="image/png, image/jpg, image/jpg"
           required
-          onChange={handleFileChange}
+          onChange={(ev) => handleFileChange(ev, side)}
         />
       </div>
       <label className="field print-type">
@@ -32,7 +35,7 @@ export function ControlForm({
         >
           <option value="normal">רגיל</option>
           <option value="big">גדול</option>
-          <option value="pocket">כיס</option>
+          {Boolean(side === "front") && <option value="pocket">כיס</option>}
         </select>
         <span>:סוג גלופה</span>
       </label>

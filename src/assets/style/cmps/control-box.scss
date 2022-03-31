@@ -12,22 +12,33 @@
     background-color: white;
   }
   .file-block {
-    padding: 10px;
+    margin-top: 10px;
+    overflow: hidden;
     border-radius: 8px;
     border-color: #775b41;
     border-style: solid;
     display: flex;
     flex-direction: column;
     margin-bottom: 0;
-    width: 210px;
-    span {
-      margin-bottom: 10px;
-      font-weight: 700;
-      text-decoration: underline;
+    width: 100px;
+    input[type="file"] {
+      display: none;
     }
-    input {
-      margin-left: 30px;
+    .custom-file-upload {
+      border: 1px solid #ccc;
+      display: inline-block;
+      padding: 6px 12px;
+      cursor: pointer;
+      background-color: white;
     }
+    // span {
+    //   margin-bottom: 10px;
+    //   font-weight: 700;
+    //   text-decoration: underline;
+    // }
+    // input {
+    //   margin-left: 30px;
+    // }
   }
   .field {
     margin: 5px;

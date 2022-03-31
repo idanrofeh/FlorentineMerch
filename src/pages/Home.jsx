@@ -34,19 +34,18 @@ export function Home() {
   };
 
   const handleItemChange = ({ target }) => {
-    const { name } = target;
-    let { value } = target;
+    const { name, value } = target;
     const updatedCanvas = { ...order.canvas, [name]: value };
     const updatedOrder = { ...order, canvas: updatedCanvas };
     setOrder(updatedOrder);
   };
 
-  const handleFileChange = async ({ target }) => {
+  const handleFileChange = async ({ target }, side) => {
     const { files } = target;
     const [print] = files;
     const { url } = await imgService.uploadPrint(print);
-    const frontPrint = { ...order.canvas.frontPrint, url };
-    const updatedCanvas = { ...order.canvas, frontPrint };
+    const currPrint = { ...order.canvas[side + "Print"], url: url };
+    const updatedCanvas = { ...order.canvas, [side + "Print"]: currPrint };
     setOrder({ ...order, canvas: updatedCanvas });
   };
 
