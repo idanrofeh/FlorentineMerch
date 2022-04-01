@@ -8,6 +8,7 @@ export function AppHeader() {
           alt=""
           src="https://res.cloudinary.com/dc6ailej1/image/upload/v1648519937/d49077fa_1_wk9qir.png"
         />
+        <div className="header-img"></div>
       </NavLink>
       <div className="header-nav">
         <NavLink className="header-btn" to="/about">

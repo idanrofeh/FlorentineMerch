@@ -69,6 +69,13 @@ export function Canvas({ canvasData, side }) {
         return;
     }
   };
-
-  return <canvas ref={canvas} height="400" width="400"></canvas>;
+  const canvasClass = side === "front" ? "canvas" : "canvas-rotate";
+  return (
+    <canvas
+      className={canvasClass}
+      ref={canvas}
+      height="400"
+      width="400"
+    ></canvas>
+  );
 }

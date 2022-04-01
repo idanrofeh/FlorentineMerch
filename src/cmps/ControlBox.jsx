@@ -3,15 +3,13 @@ import { EditBar } from "./EditBar.jsx";
 
 export function ControlBox({
   orderData,
-  handleItemChange,
-  handleOrderChange,
-  handleFileChange,
-  handlePrintChange,
+  changeFunctions,
   toggleIsFront,
   side,
 }) {
   const changeItemColor = (color) => {
-    handleItemChange({ target: { name: "item-color", value: color } });
+    const targetObj = { target: { name: "item-color", value: color } };
+    changeFunctions.handleItemChange(targetObj);
   };
 
   const itemColors = [
@@ -23,6 +21,8 @@ export function ControlBox({
     "white",
     "grey",
     "pink",
+    "yellow",
+    "orange",
   ];
 
   return (
@@ -30,22 +30,16 @@ export function ControlBox({
       <ControlForm
         side={side}
         orderData={orderData}
-        handleItemChange={handleItemChange}
-        handleOrderChange={handleOrderChange}
-        handleFileChange={handleFileChange}
+        changeFunctions={changeFunctions}
         toggleIsFront={toggleIsFront}
-        handlePrintChange={handlePrintChange}
         itemColors={itemColors}
         changeItemColor={changeItemColor}
       />
       <EditBar
         side={side}
         orderData={orderData}
-        handleItemChange={handleItemChange}
-        handleOrderChange={handleOrderChange}
-        handleFileChange={handleFileChange}
+        changeFunctions={changeFunctions}
         toggleIsFront={toggleIsFront}
-        handlePrintChange={handlePrintChange}
         itemColors={itemColors}
         changeItemColor={changeItemColor}
       />

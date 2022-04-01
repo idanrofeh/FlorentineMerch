@@ -14,8 +14,8 @@ body {
 }
 
 /* IMPORTS */
-@import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap");
 
 // PAGES
 @import "pages/home.scss";
@@ -24,7 +24,7 @@ body {
 // CMPS
 @import "cmps/app-header.scss";
 @import "cmps/canvas.scss";
-@import "cmps/control-box.scss";
+@import "cmps/control-form.scss";
 
 // HELPERS
 @import "helpers.scss";

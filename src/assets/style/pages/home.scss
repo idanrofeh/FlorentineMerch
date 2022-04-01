@@ -1,11 +1,19 @@
 .home {
+  background-image: url("https://res.cloudinary.com/dc6ailej1/image/upload/v1648776217/rocco-caruso-h4jXGhm8wuA-unsplash_j6hcef.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
   padding-bottom: 0;
   padding-top: 6px;
   justify-content: center;
   align-items: center;
   display: flex;
-  font-family: "Varela Round", sans-serif;
+  font-family: "Amatic SC", cursive;
+  flex-flow: row-reverse;
   .order-editor {
+    -webkit-box-shadow: 0px 0px 20px 3px #000000;
+    box-shadow: 0px 5px 20px 0px #bdbcbc;
+
     border-radius: 30px;
     border-width: 3.6px;
     border-color: black;
@@ -17,12 +25,22 @@
     overflow: hidden;
     max-height: 125vh;
     width: 98vw;
+    transform: rotateY(0deg);
+    transition-duration: 400ms;
+    transition-property: transform;
+  }
+  .rotated {
+    transform: rotateY(180deg);
+    transition-duration: 400ms;
+    transition-property: transform;
+    -webkit-box-shadow: -9px 14px 25px -4px #000000;
+    box-shadow: -9px 14px 25px -4px #000000;
   }
 }
 @media only screen and (min-width: 450px) {
   .home {
     .order-editor {
-      width: 95vw;
+      width: 68vw;
       max-width: 480px;
     }
   }
@@ -32,7 +50,7 @@
   .home {
     .order-editor {
       flex-direction: row;
-      height: 80vh;
+      height: 68vh;
       width: 95vw;
       max-width: 850px;
     }

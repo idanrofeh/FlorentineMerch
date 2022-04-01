@@ -4,28 +4,46 @@ export function ControlForm({
   changeItemColor,
   itemColors,
   orderData,
-  handleItemChange,
-  handleOrderChange,
-  handleFileChange,
-  handlePrintChange,
+  changeFunctions,
   toggleIsFront,
   side,
 }) {
   const { numOfItems, canvas, notes, priceForOne } = orderData;
+
+  const {
+    handleFileChange,
+    handleItemChange,
+    handleOrderChange,
+    handlePrintChange,
+  } = changeFunctions;
+
+  const formClass = side === "front" ? "" : " form-rotate";
   return (
-    <form className="control-form">
+    <form className={"control-form" + formClass}>
       <div className="file-block">
         <label htmlFor="file-upload" className="custom-file-upload">
           העלה קובץ
         </label>
-        <input
-          id="file-upload"
-          type="file"
-          name={side + "Print"}
-          accept="image/png, image/jpg, image/jpg"
-          required
-          onChange={(ev) => handleFileChange(ev, side)}
-        />
+        {side === "front" && (
+          <input
+            id="file-upload"
+            type="file"
+            name={side + "Print"}
+            accept="image/png, image/jpg, image/jpg"
+            required
+            onChange={(ev) => handleFileChange(ev, side)}
+          />
+        )}
+        {side !== "front" && (
+          <input
+            id="file-upload"
+            type="file"
+            name={side + "Print"}
+            accept="image/png, image/jpg, image/jpg"
+            required
+            onChange={(ev) => handleFileChange(ev, side)}
+          />
+        )}
       </div>
       <label className="field print-type">
         <select
@@ -37,7 +55,7 @@ export function ControlForm({
           <option value="big">גדול</option>
           {Boolean(side === "front") && <option value="pocket">כיס</option>}
         </select>
-        <span>:סוג גלופה</span>
+        <span>:סוג הדפסה</span>
       </label>
       <label className="field num">
         <input
@@ -67,6 +85,7 @@ export function ControlForm({
         ))}
       </div>
       <button
+        className="side-btn pointer"
         onClick={(ev) => {
           ev.preventDefault();
           toggleIsFront();
@@ -76,8 +95,9 @@ export function ControlForm({
       </button>
       <textarea
         name="notes"
-        className="field notes"
+        className=" notes"
         placeholder="..הכנס הערות להזמנה"
+        onChange={handleOrderChange}
       ></textarea>
     </form>
   );

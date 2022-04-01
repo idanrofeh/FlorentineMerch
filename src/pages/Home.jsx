@@ -14,7 +14,7 @@ export function Home() {
   }, []);
 
   const newOrder = {
-    numOfItems: 1,
+    numOfItems: 20,
     notes: null,
     priceForOne: 40,
     canvas: {
@@ -41,6 +41,7 @@ export function Home() {
   };
 
   const handleFileChange = async ({ target }, side) => {
+    console.log("j");
     const { files } = target;
     const [print] = files;
     const { url } = await imgService.uploadPrint(print);
@@ -56,6 +57,13 @@ export function Home() {
     setOrder({ ...order, canvas: newCanvas });
   };
 
+  const changeFunctions = {
+    handleOrderChange,
+    handlePrintChange,
+    handleItemChange,
+    handleFileChange,
+  };
+
   const toggleIsFront = () => {
     setIsFront(!isFront);
   };
@@ -64,16 +72,13 @@ export function Home() {
   const side = isFront ? "front" : "back";
   return (
     <section className="home page">
-      <div className="order-editor">
+      <div className={(side === "front" ? "" : "rotated") + " order-editor"}>
         <Canvas canvasData={order.canvas} side={side} />
         <ControlBox
           side={side}
           orderData={order}
-          handleItemChange={handleItemChange}
-          handleOrderChange={handleOrderChange}
-          handleFileChange={handleFileChange}
+          changeFunctions={changeFunctions}
           toggleIsFront={toggleIsFront}
-          handlePrintChange={handlePrintChange}
         />
       </div>
     </section>
