@@ -1,13 +1,13 @@
-.pointer:hover {
-  cursor: pointer;
-}
-
 .hidden {
   display: none;
 }
 
 .page {
   min-height: 85vh;
-  background-color: #d1df3a;
   overflow: hidden;
+}
+
+.black {
+  background-color: black;
+  height: 85vh;
 }

@@ -1,0 +1,40 @@
+.items-edit {
+  transform: translateX(0);
+  background-color: aliceblue;
+  padding: 16px;
+  border-radius: 8px;
+  border-color: black;
+  border-width: 2px;
+  border-style: solid;
+  text-align: center;
+  width: 95%;
+  max-width: 400px;
+  h2 {
+    margin: 0;
+  }
+  label {
+    font-weight: 600;
+  }
+  .add {
+    border-radius: 8px;
+    width: 30px;
+    padding-top: 3px;
+    background-color: #ffffce;
+    cursor: pointer;
+    &:hover {
+      filter: brightness(80%);
+    }
+  }
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    button {
+      background-color: #ffffce;
+      border-radius: 8px;
+      cursor: pointer;
+      &:hover {
+        filter: brightness(80%);
+      }
+    }
+  }
+}

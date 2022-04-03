@@ -5,16 +5,23 @@ input::-webkit-inner-spin-button {
 }
 
 .control-form {
-  background-color: #a5b2a8;
+  position: relative;
+  padding: 16px;
+  background-color: #dbebfa;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-evenly;
   text-align: center;
   font-size: 12px;
   font-weight: 600;
   flex-grow: 1;
   transform: rotateY(0deg);
+  .form-inputs {
+    flex-direction: column;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 90%;
+  }
   .side-btn {
     display: flex;
     align-items: center;
@@ -25,12 +32,14 @@ input::-webkit-inner-spin-button {
     font-family: "Varela Round", sans-serif;
     &:hover {
       cursor: pointer;
+      filter: brightness(80%);
     }
   }
   .file-block {
     margin-top: 10px;
     overflow: hidden;
-    font-family: "Varela Round", sans-serif;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
     border-radius: 8px;
     border-color: #775b41;
     border-style: solid;
@@ -42,7 +51,6 @@ input::-webkit-inner-spin-button {
       display: none;
     }
     .custom-file-upload {
-      font-family: "Varela Round", sans-serif;
       border: 1px solid #ccc;
       display: inline-block;
       padding: 6px 12px;
@@ -54,8 +62,13 @@ input::-webkit-inner-spin-button {
       }
     }
   }
+  label {
+    max-width: 180px;
+  }
+  input {
+    max-width: 40px;
+  }
   .field {
-    margin: 5px;
     display: flex;
     align-items: center;
     span {
@@ -81,10 +94,9 @@ input::-webkit-inner-spin-button {
       }
     }
   }
-  .num {
-    input {
-      max-width: 40px;
-    }
+  .item-color {
+    flex-wrap: wrap;
+    justify-content: center;
   }
   .color-btn {
     border-radius: 50%;
@@ -104,7 +116,7 @@ input::-webkit-inner-spin-button {
     border-radius: 8px;
     text-align: right;
     font-family: "Varela Round", sans-serif;
-    margin-top: 40px;
+    margin-top: 10px;
     width: 200px;
     height: 80px;
     background-color: #f2f1cd;
@@ -115,9 +127,36 @@ input::-webkit-inner-spin-button {
       background-color: #aca95e;
     }
   }
+  .form-nav {
+    height: 10%;
+    width: 92%;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    .edit-nav-btn {
+      background-color: #ffffce;
+      border: 2px solid black;
+      border-radius: 8px;
+      box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0 0 inset;
+      box-sizing: border-box;
+      color: rgb(0, 0, 0);
+      cursor: pointer;
+      display: inline-block;
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0;
+      padding: 8px 0.8em;
+      font-family: "Varela Round", sans-serif;
+      &:hover {
+        filter: brightness(80%);
+      }
+    }
+  }
 }
 
-.form-rotate {
+.form-y-rotate {
   transform: rotateY(180deg);
   border-right-color: #775b41;
   border-right-width: 4px;
@@ -127,7 +166,6 @@ input::-webkit-inner-spin-button {
 
 @media only screen and (min-width: 650px) {
   .control-form {
-    justify-content: space-evenly;
     border-left-color: #775b41;
     border-left-width: 4px;
     border-left-style: solid;
@@ -147,7 +185,7 @@ input::-webkit-inner-spin-button {
       font-weight: 500;
     }
     textarea {
-      margin-top: 20px;
+      margin-top: 10px;
     }
   }
 }

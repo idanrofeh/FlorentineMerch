@@ -2,18 +2,18 @@ import { useState, useEffect, useRef } from "react";
 
 import { imgService } from "../services/img.service";
 
-export function Canvas({ canvasData, side }) {
+export function Canvas({ preview, side }) {
   const [img, setImg] = useState(null);
   const [print, setPrint] = useState(null);
   const canvas = useRef(null);
 
   useEffect(() => {
-    const { item } = canvasData;
+    const { item } = preview;
     setBaseImg(item);
-    if (canvasData[side + "Print"].url) {
-      setPrintImg(canvasData[side + "Print"].url);
+    if (preview[side + "Print"].url) {
+      setPrintImg(preview[side + "Print"].url);
     } else setPrint(null);
-  }, [side, canvasData]);
+  }, [side, preview]);
 
   useEffect(() => {
     if (img && canvas) {
@@ -23,7 +23,7 @@ export function Canvas({ canvasData, side }) {
         drawPrint(ctx);
       }
     }
-  }, [img, canvasData, print, side]);
+  }, [img, preview, print, side]);
 
   const setBaseImg = (item) => {
     const shirtImg = new Image();
@@ -47,12 +47,12 @@ export function Canvas({ canvasData, side }) {
     ctx.clearRect(0, 0, 400, 400);
     ctx.drawImage(img, 20, 20, 350, 350);
     ctx.globalCompositeOperation = "source-in";
-    ctx.fillStyle = canvasData["item-color"];
+    ctx.fillStyle = preview["item-color"];
     ctx.fillRect(0, 0, 400, 400);
   };
 
   const drawPrint = (ctx) => {
-    const currPrint = canvasData[side + "Print"];
+    const currPrint = preview[side + "Print"];
     const { type } = currPrint;
     ctx.globalCompositeOperation = "source-over";
     switch (type) {

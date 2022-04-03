@@ -1,9 +1,13 @@
 .about {
+  background-image: url("https://wallpaperaccess.com/full/232933.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   padding: 0.9rem;
   text-align: center;
-  color: #414141;
+  color: #ffffff;
   .title {
     margin: 0;
     margin-bottom: 20px;

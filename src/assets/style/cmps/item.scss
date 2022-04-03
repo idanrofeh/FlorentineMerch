@@ -1,0 +1,31 @@
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-color: black;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 8px;
+  padding: 6px;
+  margin: 10px;
+  label {
+    span {
+      font-size: 20px;
+    }
+    select,
+    input {
+      margin: 10px;
+      max-width: 50px;
+    }
+  }
+  .remove {
+    margin-left: 10px;
+  }
+  button {
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover {
+      filter: brightness(80%);
+    }
+  }
+}
