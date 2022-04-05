@@ -1,0 +1,9 @@
+.preview-controls {
+  display: flex;
+  flex-direction: column;
+  height: 140px;
+  justify-content: space-around;
+  label {
+    margin: auto;
+  }
+}

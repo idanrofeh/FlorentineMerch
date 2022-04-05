@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 import { utilService } from "../../services/util.service";
 
 export function Item({ id, item, handleItemsChange, itemColors, deleteItem }) {
@@ -17,7 +15,7 @@ export function Item({ id, item, handleItemsChange, itemColors, deleteItem }) {
           onChange={handleItemsChange}
           value={item.amount}
         ></input>
-        <span>מידה</span>
+        <span>:כמות</span>
       </label>
       <label>
         <select
@@ -36,7 +34,24 @@ export function Item({ id, item, handleItemsChange, itemColors, deleteItem }) {
             );
           })}
         </select>
-        <span>צבע פריט</span>
+        <span>:מידה</span>
+        {/* <label>
+          <select
+            id={id}
+            name="size"
+            className="types"
+            onChange={handleItemsChange}
+            value={item.type}
+          >
+            {types.map((type) => {
+              return (
+                <option key={utilService.makeId()} value={type}>
+                  {type}
+                </option>
+              );
+            })}
+          </select>
+        </label> */}
       </label>
       <label>
         <select
@@ -57,7 +72,7 @@ export function Item({ id, item, handleItemsChange, itemColors, deleteItem }) {
             );
           })}
         </select>
-        <span> כמות</span>
+        <span> :צבע פריט</span>
       </label>
       <button
         className="remove"

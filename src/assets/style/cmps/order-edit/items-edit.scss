@@ -1,6 +1,9 @@
 .items-edit {
+  align-self: baseline;
+  margin-top: 20px;
   transform: translateX(0);
   background-color: aliceblue;
+  box-shadow: 0px 5px 20px 0px #bdbcbc;
   padding: 16px;
   border-radius: 8px;
   border-color: black;
@@ -18,8 +21,10 @@
   .add {
     border-radius: 8px;
     width: 30px;
-    padding-top: 3px;
-    background-color: #ffffce;
+    padding-top: 5px;
+    background-color: white;
+    margin-left: 87%;
+    margin-bottom: 10px;
     cursor: pointer;
     &:hover {
       filter: brightness(80%);

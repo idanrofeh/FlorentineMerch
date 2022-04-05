@@ -8,18 +8,25 @@
   border-radius: 8px;
   padding: 6px;
   margin: 10px;
+  background-color: #d5dde4;
   label {
+    display: flex;
+    font-weight: 600;
+    align-items: center;
     span {
       font-size: 20px;
     }
     select,
     input {
+      cursor: pointer;
       margin: 10px;
       max-width: 50px;
     }
   }
   .remove {
     margin-left: 10px;
+    background-color: #d72c2c;
+    color: #ebebeb;
   }
   button {
     border-radius: 4px;

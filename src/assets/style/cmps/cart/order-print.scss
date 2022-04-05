@@ -1,0 +1,8 @@
+.order-print {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-evenly;
+  .print-title {
+    font-weight: 500;
+  }
+}

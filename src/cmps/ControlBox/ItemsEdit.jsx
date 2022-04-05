@@ -1,3 +1,5 @@
+import { AiOutlinePlus } from "react-icons/ai";
+
 import { Item } from "./Item.jsx";
 
 export function ItemsEdit({
@@ -7,6 +9,7 @@ export function ItemsEdit({
   itemColors,
   setIsPrintEdit,
   deleteItem,
+  addToCart,
 }) {
   return (
     <section className="items-edit">
@@ -29,7 +32,7 @@ export function ItemsEdit({
             addItem();
           }}
         >
-          +
+          <AiOutlinePlus />
         </button>
       )}
       <div className="nav">
@@ -37,6 +40,7 @@ export function ItemsEdit({
           className="edit-nav-btn left"
           onClick={(ev) => {
             ev.preventDefault();
+            addToCart();
           }}
         >
           🡠 הוסף לעגלה

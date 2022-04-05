@@ -1,4 +1,9 @@
-import { useState } from "react";
+import { connect } from "react-redux";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import { updateCart } from "../store/actions/cart-actions.js";
 
 import { imgService } from "../services/img.service.js";
 import { utilService } from "../services/util.service.js";
@@ -7,7 +12,9 @@ import { Canvas } from "../cmps/Canvas.jsx";
 import { ControlBox } from "../cmps/ControlBox/ControlBox.jsx";
 import { ItemsEdit } from "../cmps/ControlBox/ItemsEdit.jsx";
 
-export function Home() {
+function _OrderEdit({ cart, updateCart }) {
+  let navigate = useNavigate();
+
   const newPreview = {
     priceForOne: 40,
     frontPrint: { type: "normal" },
@@ -29,12 +36,32 @@ export function Home() {
     "orange",
   ];
 
-  const [preview, setPreview] = useState(newPreview);
-  const [items, setItems] = useState([
-    { color: "black", size: "M", amount: 20, id: "123" },
-  ]);
+  const [preview, setPreview] = useState(null);
+  const [items, setItems] = useState(null);
   const [isFront, setIsFront] = useState(true);
   const [isPrintEdit, setIsPrintEdit] = useState(true);
+
+  const [searchParams] = useSearchParams();
+  const orderId = searchParams.get("orderId");
+
+  useEffect(() => {
+    const orderToSet = cart.find((order) => order.id === orderId);
+    if (orderToSet) {
+      setOrderToUpdate(orderToSet);
+    } else {
+      setPreview(newPreview);
+      setItems([{ color: "black", size: "M", amount: 20, id: "123" }]);
+    }
+  }, []);
+
+  const setOrderToUpdate = (order) => {
+    let { backPrint } = order;
+    let { frontPrint } = order;
+    if (!backPrint) backPrint = { type: "normal" };
+    if (!frontPrint) frontPrint = { type: "normal" };
+    setItems(order.items);
+    setPreview({ ...newPreview, backPrint, frontPrint });
+  };
 
   const handlePreviewChange = ({ target }) => {
     const { name } = target;
@@ -78,9 +105,33 @@ export function Home() {
 
   const deleteItem = ({ target }) => {
     const { id } = target;
-    console.log(id);
     const updatedItems = items.filter((item) => item.id !== id);
     setItems(updatedItems);
+  };
+
+  const addToCart = () => {
+    const newOrder = getOrderForCart();
+    let newCart = [...cart];
+    if (orderId) {
+      newCart = newCart.map((order) => {
+        return order.id !== orderId ? order : newOrder;
+      });
+    } else {
+      newOrder.id = utilService.makeId();
+      newCart.push(newOrder);
+    }
+    updateCart(newCart);
+    navigate("/cart");
+  };
+
+  const getOrderForCart = () => {
+    const { backPrint, frontPrint } = preview;
+    let newOrder = {
+      items,
+    };
+    if (backPrint.url) newOrder.backPrint = backPrint;
+    if (frontPrint.url) newOrder.frontPrint = frontPrint;
+    return newOrder;
   };
 
   const changeFunctions = {
@@ -105,7 +156,6 @@ export function Home() {
             preview={preview}
             changeFunctions={changeFunctions}
             toggleIsFront={toggleIsFront}
-            items={items}
             itemColors={itemColors}
             setIsPrintEdit={setIsPrintEdit}
           />
@@ -119,8 +169,24 @@ export function Home() {
           addItem={addItem}
           setIsPrintEdit={setIsPrintEdit}
           deleteItem={deleteItem}
+          addToCart={addToCart}
         />
       )}
     </section>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    cart: state.cartModule.cart,
+  };
+}
+
+const mapDispatchToProps = {
+  updateCart,
+};
+
+export const OrderEdit = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(_OrderEdit);

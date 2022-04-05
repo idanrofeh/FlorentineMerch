@@ -1,0 +1,9 @@
+.print-details {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  align-items: center;
+  .print-title {
+    margin-bottom: 8px;
+  }
+}

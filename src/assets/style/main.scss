@@ -20,16 +20,24 @@ body {
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
 // PAGES
-@import "pages/home.scss";
+@import "pages/order-edit.scss";
+@import "pages/cart.scss";
 @import "pages/about.scss";
 
 // CMPS
 @import "cmps/app-header.scss";
-@import "cmps/canvas.scss";
-@import "cmps/control-form.scss";
-@import "cmps/preview-controls.scss";
-@import "cmps/items-edit.scss";
-@import "cmps/item.scss";
+//ORDER-EDIT
+@import "cmps/order-edit/canvas.scss";
+@import "cmps/order-edit/control-form.scss";
+@import "cmps/order-edit/preview-controls.scss";
+@import "cmps/order-edit/items-edit.scss";
+@import "cmps/order-edit/item.scss";
+@import "cmps/order-edit/item.scss";
+//CART
+@import "cmps/cart/cart-order.scss";
+@import "cmps/cart/order-print.scss";
+@import "cmps/cart/print-details.scss";
+@import "cmps/cart/item-list.scss";
 
 // HELPERS
 @import "helpers.scss";

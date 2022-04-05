@@ -1,11 +1,16 @@
-import { Home } from "./pages/Home.jsx"
-import { About } from "./pages/About.jsx"
+import { OrderEdit } from "./pages/OrderEdit.jsx";
+import { Cart } from "./pages/Cart.jsx";
+import { About } from "./pages/About.jsx";
 
 
 export default [
     {
         path: "/",
-        component: Home,
+        component: OrderEdit,
+    },
+    {
+        path: "/cart",
+        component: Cart
     },
     {
         path: "/about",
