@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { EditBarBtn } from "./EditBatBtn.jsx";
+import { EditBarBtn } from "./EditBarBtn.jsx";
 import { AiOutlineUpload } from "react-icons/ai";
 
 export function EditBar({
   changeItemColor,
-  itemColors,
   preview,
   changeFunctions,
   toggleIsFront,

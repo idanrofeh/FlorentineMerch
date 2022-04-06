@@ -32,7 +32,6 @@ export function ControlBox({
         preview={preview}
         changeFunctions={changeFunctions}
         toggleIsFront={toggleIsFront}
-        itemColors={itemColors}
         changeItemColor={changeItemColor}
         items={items}
       />

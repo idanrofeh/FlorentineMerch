@@ -3,7 +3,6 @@ import { PreviewControls } from "./PreviewControls.jsx";
 
 export function ControlForm({
   changeItemColor,
-  itemColors,
   preview,
   changeFunctions,
   toggleIsFront,
@@ -28,7 +27,6 @@ export function ControlForm({
           preview={preview}
           handlePreviewChange={handlePreviewChange}
           changeItemColor={changeItemColor}
-          itemColors={itemColors}
         />
         <button
           className="side-btn pointer"

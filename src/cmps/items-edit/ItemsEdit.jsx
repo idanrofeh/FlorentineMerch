@@ -6,7 +6,6 @@ export function ItemsEdit({
   handleItemsChange,
   items,
   addItem,
-  itemColors,
   setIsPrintEdit,
   deleteItem,
   addToCart,
@@ -20,7 +19,6 @@ export function ItemsEdit({
           id={item.id}
           item={item}
           handleItemsChange={handleItemsChange}
-          itemColors={itemColors}
           deleteItem={deleteItem}
         />
       ))}

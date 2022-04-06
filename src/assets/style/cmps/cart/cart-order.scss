@@ -2,10 +2,20 @@
   display: flex;
   align-items: center;
   width: 100%;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  padding: 10px;
   .order-preview {
+    cursor: pointer;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+  }
+  &:hover {
+    background-color: #9cb6d1;
   }
 }

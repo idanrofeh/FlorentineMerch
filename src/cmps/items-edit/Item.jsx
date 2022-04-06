@@ -1,7 +1,11 @@
 import { utilService } from "../../services/util.service";
+import { hebService } from "../../services/heb.service.js";
+import { itemData } from "../../data/item";
 
-export function Item({ id, item, handleItemsChange, itemColors, deleteItem }) {
+export function Item({ id, item, handleItemsChange, deleteItem }) {
   const sizes = ["S", "M", "L"];
+  const types = ["short", "long", "hoodie"];
+  const itemColors = itemData.colors;
 
   return (
     <section className="item">
@@ -35,23 +39,23 @@ export function Item({ id, item, handleItemsChange, itemColors, deleteItem }) {
           })}
         </select>
         <span>:מידה</span>
-        {/* <label>
-          <select
-            id={id}
-            name="size"
-            className="types"
-            onChange={handleItemsChange}
-            value={item.type}
-          >
-            {types.map((type) => {
-              return (
-                <option key={utilService.makeId()} value={type}>
-                  {type}
-                </option>
-              );
-            })}
-          </select>
-        </label> */}
+      </label>
+      <label>
+        <select
+          id={id}
+          name="type"
+          className="types"
+          onChange={handleItemsChange}
+          value={item.type}
+        >
+          {types.map((type) => {
+            return (
+              <option key={utilService.makeId()} value={type}>
+                {hebService.getItemType(type)}
+              </option>
+            );
+          })}
+        </select>
       </label>
       <label>
         <select

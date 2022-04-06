@@ -33,6 +33,9 @@ function _Cart({ cart, updateCart }) {
           );
         })}
       </div>
+      <NavLink to="/" className="add-order">
+        הוסף הזמנה
+      </NavLink>
     </section>
   );
 }

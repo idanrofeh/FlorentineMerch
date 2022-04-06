@@ -10,7 +10,7 @@ import { utilService } from "../services/util.service.js";
 
 import { Canvas } from "../cmps/Canvas.jsx";
 import { ControlBox } from "../cmps/ControlBox/ControlBox.jsx";
-import { ItemsEdit } from "../cmps/ControlBox/ItemsEdit.jsx";
+import { ItemsEdit } from "../cmps/items-edit/ItemsEdit.jsx";
 
 function _OrderEdit({ cart, updateCart }) {
   let navigate = useNavigate();
@@ -23,18 +23,12 @@ function _OrderEdit({ cart, updateCart }) {
     item: "short",
   };
 
-  const itemColors = [
-    "black",
-    "green",
-    "red",
-    "blue",
-    "purple",
-    "white",
-    "grey",
-    "pink",
-    "yellow",
-    "orange",
-  ];
+  const newItem = {
+    color: "black",
+    size: "M",
+    amount: 20,
+    type: "short",
+  };
 
   const [preview, setPreview] = useState(null);
   const [items, setItems] = useState(null);
@@ -50,7 +44,7 @@ function _OrderEdit({ cart, updateCart }) {
       setOrderToUpdate(orderToSet);
     } else {
       setPreview(newPreview);
-      setItems([{ color: "black", size: "M", amount: 20, id: "123" }]);
+      setItems([{ ...newItem, id: utilService.makeId() }]);
     }
   }, []);
 
@@ -97,7 +91,7 @@ function _OrderEdit({ cart, updateCart }) {
   };
 
   const addItem = () => {
-    const newItem = { id: utilService.makeId(), amount: 20 };
+    const newItem = { newItem, id: utilService.makeId() };
     let updatedItems = [...items];
     updatedItems.push(newItem);
     setItems(updatedItems);
@@ -156,14 +150,12 @@ function _OrderEdit({ cart, updateCart }) {
             preview={preview}
             changeFunctions={changeFunctions}
             toggleIsFront={toggleIsFront}
-            itemColors={itemColors}
             setIsPrintEdit={setIsPrintEdit}
           />
         </div>
       )}
       {!isPrintEdit && (
         <ItemsEdit
-          itemColors={itemColors}
           handleItemsChange={handleItemsChange}
           items={items}
           addItem={addItem}

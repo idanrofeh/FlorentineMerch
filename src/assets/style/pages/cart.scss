@@ -1,8 +1,10 @@
 .cart {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   .order-list {
+    background-color: #dbebfa;
     border-radius: 30px;
     border-width: 2.6px;
     border-color: black;
@@ -13,7 +15,7 @@
     flex-direction: column;
     overflow: hidden;
     width: 98vw;
-    max-width: 400px;
+    max-width: 625px;
     padding: 25px;
   }
 }

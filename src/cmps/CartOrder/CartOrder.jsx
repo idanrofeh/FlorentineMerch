@@ -6,10 +6,7 @@ import { ItemList } from "./ItemList.jsx";
 export function CartOrder({ order, removeOrder }) {
   let navigate = useNavigate();
 
-  const { items } = order;
-  const { backPrint } = order;
-  const { frontPrint } = order;
-  console.log(items);
+  const { items, backPrint, frontPrint } = order;
   return (
     <section className="cart-order">
       <div
