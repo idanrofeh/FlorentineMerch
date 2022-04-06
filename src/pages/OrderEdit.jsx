@@ -13,6 +13,13 @@ import { ControlBox } from "../cmps/ControlBox/ControlBox.jsx";
 import { ItemsEdit } from "../cmps/items-edit/ItemsEdit.jsx";
 
 function _OrderEdit({ cart, updateCart }) {
+  const blankItem = {
+    color: "black",
+    size: "M",
+    amount: 20,
+    type: "short",
+  };
+
   let navigate = useNavigate();
 
   const newPreview = {
@@ -21,13 +28,6 @@ function _OrderEdit({ cart, updateCart }) {
     backPrint: { type: "normal" },
     "item-color": "black",
     item: "short",
-  };
-
-  const newItem = {
-    color: "black",
-    size: "M",
-    amount: 20,
-    type: "short",
   };
 
   const [preview, setPreview] = useState(null);
@@ -44,7 +44,7 @@ function _OrderEdit({ cart, updateCart }) {
       setOrderToUpdate(orderToSet);
     } else {
       setPreview(newPreview);
-      setItems([{ ...newItem, id: utilService.makeId() }]);
+      setItems([{ ...blankItem, id: utilService.makeId() }]);
     }
   }, []);
 
@@ -91,7 +91,7 @@ function _OrderEdit({ cart, updateCart }) {
   };
 
   const addItem = () => {
-    const newItem = { newItem, id: utilService.makeId() };
+    const newItem = { ...blankItem, id: utilService.makeId() };
     let updatedItems = [...items];
     updatedItems.push(newItem);
     setItems(updatedItems);

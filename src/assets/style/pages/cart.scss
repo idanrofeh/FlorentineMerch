@@ -1,8 +1,15 @@
 .cart {
+  background-image: url("https://res.cloudinary.com/dc6ailej1/image/upload/v1648776217/rocco-caruso-h4jXGhm8wuA-unsplash_j6hcef.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-family: "Amatic SC", cursive;
+  font-size: 20px;
+  font-weight: 600;
   .order-list {
     background-color: #dbebfa;
     border-radius: 30px;
@@ -17,10 +24,22 @@
     width: 98vw;
     max-width: 625px;
     padding: 25px;
+    padding-bottom: 20px;
+    .add-order {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+    }
   }
 }
 
 .empty {
+  background-image: url("https://res.cloudinary.com/dc6ailej1/image/upload/v1648776217/rocco-caruso-h4jXGhm8wuA-unsplash_j6hcef.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -6,8 +6,11 @@ export function OrderItem({ item }) {
     <section className="order-item">
       <div>{hebService.getItemType(type)}</div>
       <div className="color" style={{ backgroundColor: color }}></div>
-      <div>{amount}</div>
       <div> {size} </div>
+      <div>
+        {amount}
+        <span>{" :יחידות"}</span>
+      </div>
     </section>
   );
 }

@@ -32,10 +32,10 @@ function _Cart({ cart, updateCart }) {
             <CartOrder key={order.id} order={order} removeOrder={removeOrder} />
           );
         })}
+        <NavLink to="/" className="add-order">
+          הוסף הזמנה
+        </NavLink>
       </div>
-      <NavLink to="/" className="add-order">
-        הוסף הזמנה
-      </NavLink>
     </section>
   );
 }
