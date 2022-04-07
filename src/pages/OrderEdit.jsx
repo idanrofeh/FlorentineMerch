@@ -49,8 +49,7 @@ function _OrderEdit({ cart, updateCart }) {
   }, []);
 
   const setOrderToUpdate = (order) => {
-    let { backPrint } = order;
-    let { frontPrint } = order;
+    let { backPrint, frontPrint } = order;
     if (!backPrint) backPrint = { type: "normal" };
     if (!frontPrint) frontPrint = { type: "normal" };
     setItems(order.items);
@@ -88,6 +87,20 @@ function _OrderEdit({ cart, updateCart }) {
       item.id === id ? { ...item, [name]: value } : item
     );
     setItems(updatedItems);
+  };
+
+  const removeFile = () => {
+    const print = side === "front" ? "frontPrint" : "backPrint";
+    const newPrint = { type: "normal" };
+    console.log({ ...preview, [print]: newPrint });
+    setPreview({ ...preview, [print]: newPrint });
+  };
+
+  const changeFunctions = {
+    handlePreviewChange,
+    handlePrintChange,
+    handleFileChange,
+    removeFile,
   };
 
   const addItem = () => {
@@ -128,12 +141,6 @@ function _OrderEdit({ cart, updateCart }) {
     return newOrder;
   };
 
-  const changeFunctions = {
-    handlePreviewChange,
-    handlePrintChange,
-    handleFileChange,
-  };
-
   const toggleIsFront = () => {
     setIsFront(!isFront);
   };
@@ -141,7 +148,7 @@ function _OrderEdit({ cart, updateCart }) {
   if (!preview) return <div className="black">Loading..</div>;
   const side = isFront ? "front" : "back";
   return (
-    <section className="home page">
+    <section className="order-edit page">
       {isPrintEdit && (
         <div className={(side === "front" ? "" : "rotated") + " order-editor"}>
           <Canvas preview={preview} side={side} />

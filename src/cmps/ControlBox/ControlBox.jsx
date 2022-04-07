@@ -7,7 +7,6 @@ export function ControlBox({
   toggleIsFront,
   side,
   items,
-  itemColors,
   setIsPrintEdit,
 }) {
   const changeItemColor = (color) => {
@@ -22,7 +21,6 @@ export function ControlBox({
         preview={preview}
         changeFunctions={changeFunctions}
         toggleIsFront={toggleIsFront}
-        itemColors={itemColors}
         changeItemColor={changeItemColor}
         items={items}
         setIsPrintEdit={setIsPrintEdit}
@@ -34,6 +32,7 @@ export function ControlBox({
         toggleIsFront={toggleIsFront}
         changeItemColor={changeItemColor}
         items={items}
+        setIsPrintEdit={setIsPrintEdit}
       />
     </>
   );

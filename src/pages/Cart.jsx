@@ -12,7 +12,6 @@ function _Cart({ cart, updateCart }) {
     let newCart = [...cart];
     newCart = newCart.filter((order) => order.id !== id);
     updateCart(newCart);
-    console.log(newCart);
   };
 
   if (!cart.length)

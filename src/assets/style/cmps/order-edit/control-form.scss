@@ -5,6 +5,8 @@ input::-webkit-inner-spin-button {
 }
 
 .control-form {
+  display: flex;
+  justify-content: center;
   position: relative;
   padding: 16px;
   background-color: #dbebfa;
@@ -12,7 +14,7 @@ input::-webkit-inner-spin-button {
   text-align: center;
   font-size: 12px;
   font-weight: 600;
-  flex-grow: 1;
+  width: 100%;
   transform: rotateY(0deg);
   .form-inputs {
     flex-direction: column;
@@ -21,65 +23,6 @@ input::-webkit-inner-spin-button {
     align-items: center;
     justify-content: space-evenly;
     height: 90%;
-    label {
-      select {
-        margin-left: 0;
-      }
-    }
-  }
-  .side-btn {
-    display: flex;
-    align-items: center;
-    border-radius: 8px;
-    background-color: #e4e184;
-    padding: 6px;
-    height: 34px;
-    font-family: "Varela Round", sans-serif;
-    &:hover {
-      cursor: pointer;
-      filter: brightness(80%);
-    }
-  }
-  .file-block {
-    margin: auto;
-    margin-top: 10px;
-    margin-bottom: 35px;
-    overflow: hidden;
-    font-family: "Open Sans", sans-serif;
-    font-weight: 400;
-    border-radius: 8px;
-    border-color: #775b41;
-    border-style: solid;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 0;
-    width: 100px;
-    input[type="file"] {
-      display: none;
-    }
-    .custom-file-upload {
-      width: 200px;
-      border: 1px solid #ccc;
-      display: inline-block;
-      padding: 6px 12px;
-      cursor: pointer;
-      background-color: #ffffce;
-      text-decoration: underline;
-      &:hover {
-        background-color: #aca95e;
-      }
-    }
-  }
-  label {
-    max-width: 180px;
-  }
-  .shirt-type {
-    margin: auto;
-    margin-bottom: 0;
-    margin-top: 0;
-  }
-  input {
-    max-width: 40px;
   }
   input,
   select {
@@ -99,23 +42,34 @@ input::-webkit-inner-spin-button {
       background-color: #aca95e;
     }
   }
-}
-.item-color {
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.color-btn {
-  border-radius: 50%;
-  padding: 2px;
-  height: 20px;
-  width: 20px;
-  margin: 5px;
-  border-style: solid;
-  cursor: pointer;
-  &:hover {
-    filter: brightness(80%);
+  .form-nav {
+    height: 10%;
+    width: 92%;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    .edit-nav-btn {
+      background-color: #ffffce;
+      border: 2px solid black;
+      border-radius: 8px;
+      box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0 0 inset;
+      box-sizing: border-box;
+      color: rgb(0, 0, 0);
+      cursor: pointer;
+      display: inline-block;
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0;
+      font-family: "Varela Round", sans-serif;
+      &:hover {
+        filter: brightness(80%);
+      }
+    }
   }
 }
+
 textarea {
   padding: 6px;
   resize: none;
@@ -133,32 +87,6 @@ textarea {
     background-color: #aca95e;
   }
 }
-.form-nav {
-  height: 10%;
-  width: 92%;
-  align-items: center;
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  .edit-nav-btn {
-    background-color: #ffffce;
-    border: 2px solid black;
-    border-radius: 8px;
-    box-shadow: rgba(255, 255, 255, 0.4) 0 1px 0 0 inset;
-    box-sizing: border-box;
-    color: rgb(0, 0, 0);
-    cursor: pointer;
-    display: inline-block;
-    font-size: 16px;
-    font-weight: 500;
-    margin: 0;
-    font-family: "Varela Round", sans-serif;
-    &:hover {
-      filter: brightness(80%);
-    }
-  }
-}
 
 .form-y-rotate {
   transform: rotateY(180deg);
@@ -168,22 +96,19 @@ textarea {
   border-left-width: 0;
 }
 
-@media only screen and (min-width: 650px) {
+@media only screen and (min-width: 680px) {
   .control-form {
     border-left-color: #775b41;
     border-left-width: 4px;
     border-left-style: solid;
     height: 100%;
     width: 250px;
+    flex-grow: 1;
     font-size: 23px;
     flex-direction: column;
     .file-block {
       margin-bottom: 35px;
-      width: 100%;
-    }
-    button {
-      font-size: 16px;
-      font-weight: 500;
+      width: 200px;
     }
   }
 

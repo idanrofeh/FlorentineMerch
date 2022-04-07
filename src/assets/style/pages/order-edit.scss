@@ -1,4 +1,4 @@
-.home {
+.order-edit {
   background-image: url("https://res.cloudinary.com/dc6ailej1/image/upload/v1648776217/rocco-caruso-h4jXGhm8wuA-unsplash_j6hcef.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -34,7 +34,7 @@
   }
 }
 @media only screen and (min-width: 450px) {
-  .home {
+  .order-edit {
     .order-editor {
       width: 68vw;
       max-width: 480px;
@@ -43,7 +43,7 @@
 }
 
 @media only screen and (min-width: 650px) {
-  .home {
+  .order-edit {
     .order-editor {
       flex-direction: row;
       height: 68vh;

@@ -9,8 +9,12 @@ export function ControlForm({
   side,
   setIsPrintEdit,
 }) {
-  const { handleFileChange, handlePreviewChange, handlePrintChange } =
-    changeFunctions;
+  const {
+    handleFileChange,
+    handlePreviewChange,
+    handlePrintChange,
+    removeFile,
+  } = changeFunctions;
 
   const rotationClass = side === "front" ? "" : " form-y-rotate";
 
@@ -22,21 +26,14 @@ export function ControlForm({
           handlePrintChange={handlePrintChange}
           side={side}
           preview={preview}
+          removeFile={removeFile}
         />
         <PreviewControls
           preview={preview}
           handlePreviewChange={handlePreviewChange}
           changeItemColor={changeItemColor}
+          toggleIsFront={toggleIsFront}
         />
-        <button
-          className="side-btn pointer"
-          onClick={(ev) => {
-            ev.preventDefault();
-            toggleIsFront();
-          }}
-        >
-          החלף צד 🔄
-        </button>
       </div>
       <section className="form-nav">
         <button
@@ -47,7 +44,7 @@ export function ControlForm({
             setIsPrintEdit(false);
           }}
         >
-          🡠 התקדם
+          🡠 הוסף פריט
         </button>
       </section>
     </form>

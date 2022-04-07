@@ -9,20 +9,16 @@ canvas {
   transform: rotateY(180deg);
 }
 
-@media only screen and (min-width: 650px) {
+@media only screen and (min-width: 680px) {
   canvas {
-    flex-grow: 1;
     height: 100%;
-    flex-grow: 80;
-    width: 60%;
-  }
-  .canvas-rotate {
-    height: 100%;
+    width: 400px;
   }
 }
 
-@media only screen and (min-width: 750px) {
+@media only screen and (min-width: 800px) {
   canvas {
-    max-width: 440px;
+    height: 500px;
+    width: 500px;
   }
 }
