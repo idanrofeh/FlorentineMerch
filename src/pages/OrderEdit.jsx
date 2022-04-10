@@ -8,43 +8,44 @@ import { updateCart } from "../store/actions/cart-actions.js";
 import { imgService } from "../services/img.service.js";
 import { utilService } from "../services/util.service.js";
 
-import { Canvas } from "../cmps/Canvas.jsx";
+import { ProductPreview } from "../cmps/ProductPreview.jsx";
 import { ControlBox } from "../cmps/ControlBox/ControlBox.jsx";
 import { ItemsEdit } from "../cmps/items-edit/ItemsEdit.jsx";
 
 function _OrderEdit({ cart, updateCart }) {
+  let navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const orderId = searchParams.get("orderId");
+
   const blankItem = {
-    color: "black",
+    itemColor: "black",
     size: "M",
     amount: 20,
-    type: "short",
+    itemType: "short",
   };
-
-  let navigate = useNavigate();
 
   const newPreview = {
     priceForOne: 40,
-    frontPrint: { type: "normal" },
-    backPrint: { type: "normal" },
-    "item-color": "black",
-    item: "short",
+    itemColor: "black",
+    itemType: "short",
   };
 
   const [preview, setPreview] = useState(null);
-  const [items, setItems] = useState(null);
+  const [items, setItems] = useState([]);
   const [isFront, setIsFront] = useState(true);
   const [isPrintEdit, setIsPrintEdit] = useState(true);
-
-  const [searchParams] = useSearchParams();
-  const orderId = searchParams.get("orderId");
+  const [print, setPrint] = useState({
+    frontPrint: { type: "normal" },
+    backPrint: { type: "normal" },
+  });
 
   useEffect(() => {
     const orderToSet = cart.find((order) => order.id === orderId);
     if (orderToSet) {
       setOrderToUpdate(orderToSet);
+      setIsPrintEdit(false);
     } else {
       setPreview(newPreview);
-      setItems([{ ...blankItem, id: utilService.makeId() }]);
     }
   }, []);
 
@@ -66,17 +67,43 @@ function _OrderEdit({ cart, updateCart }) {
 
   const handleFileChange = async ({ target }, side) => {
     const { files } = target;
-    const print = files[files.length - 1];
-    const { url } = await imgService.uploadPrint(print);
-    const currPrint = { ...preview[side + "Print"], url };
-    setPreview({ ...preview, [side + "Print"]: currPrint });
+    const file = files[files.length - 1];
+    const { url } = await imgService.uploadPrint(file);
+    let currPrint = { ...print[side + "Print"], url };
+    const dimensions = await getPrintDimensions(
+      currPrint.type,
+      url,
+      preview.itemType
+    );
+    const { height, width } = dimensions;
+    currPrint = { ...currPrint, height, width };
+    setPrint({ ...print, [side + "Print"]: currPrint });
   };
 
-  const handlePrintChange = ({ target }, side) => {
+  const handlePrintChange = async ({ target }, side) => {
     const { name, value } = target;
-    const currPrint = { ...preview[side], [name]: value };
-    const newPreview = { ...preview, [side]: currPrint };
-    setPreview(newPreview);
+    let newCurrPrint;
+    if (name === "type") {
+      const { height, width } = await getPrintDimensions(
+        value,
+        print[side].url,
+        preview.itemType
+      );
+      newCurrPrint = { ...print[side], [name]: value, height, width };
+    } else {
+      newCurrPrint = { ...print[side], [name]: value };
+    }
+    const newPrint = { ...print, [side]: newCurrPrint };
+    setPrint(newPrint);
+  };
+
+  const getPrintDimensions = async (printType, url, itemType) => {
+    const dimensions = await imgService.getImgDimensions(
+      url,
+      printType,
+      itemType
+    );
+    return dimensions;
   };
 
   const handleItemsChange = ({ target }) => {
@@ -90,10 +117,9 @@ function _OrderEdit({ cart, updateCart }) {
   };
 
   const removeFile = () => {
-    const print = side === "front" ? "frontPrint" : "backPrint";
+    const currPrint = side === "front" ? "frontPrint" : "backPrint";
     const newPrint = { type: "normal" };
-    console.log({ ...preview, [print]: newPrint });
-    setPreview({ ...preview, [print]: newPrint });
+    setPrint({ ...print, [currPrint]: newPrint });
   };
 
   const changeFunctions = {
@@ -116,10 +142,24 @@ function _OrderEdit({ cart, updateCart }) {
     setItems(updatedItems);
   };
 
+  const addItemFromPreview = () => {
+    const { itemColor, itemType } = preview;
+    const newItem = {
+      ...blankItem,
+      itemColor,
+      itemType,
+      id: utilService.makeId(),
+    };
+    let newItems = [...items];
+    newItems.push(newItem);
+    setItems(newItems);
+  };
+
   const addToCart = () => {
-    const newOrder = getOrderForCart();
+    let newOrder = getOrderForCart();
     let newCart = [...cart];
     if (orderId) {
+      newOrder.id = orderId;
       newCart = newCart.map((order) => {
         return order.id !== orderId ? order : newOrder;
       });
@@ -151,13 +191,15 @@ function _OrderEdit({ cart, updateCart }) {
     <section className="order-edit page">
       {isPrintEdit && (
         <div className={(side === "front" ? "" : "rotated") + " order-editor"}>
-          <Canvas preview={preview} side={side} />
+          <ProductPreview side={side} preview={preview} print={print} />
           <ControlBox
             side={side}
             preview={preview}
+            print={print}
             changeFunctions={changeFunctions}
             toggleIsFront={toggleIsFront}
             setIsPrintEdit={setIsPrintEdit}
+            addItemFromPreview={addItemFromPreview}
           />
         </div>
       )}
@@ -169,6 +211,7 @@ function _OrderEdit({ cart, updateCart }) {
           setIsPrintEdit={setIsPrintEdit}
           deleteItem={deleteItem}
           addToCart={addToCart}
+          print={print}
         />
       )}
     </section>

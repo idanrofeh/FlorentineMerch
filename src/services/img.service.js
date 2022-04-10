@@ -1,24 +1,25 @@
 import axios from 'axios';
+import { printData } from '../data/print';
 
 const frontItemURLs = {
   short:
-    "https://res.cloudinary.com/dc6ailej1/image/upload/v1648500864/newtshirt_f4601y.png",
+    "https://res.cloudinary.com/dc6ailej1/image/upload/v1649537460/front_tshirt_short_black_swldjz.jpg",
   hoodie:
-    "https://res.cloudinary.com/dc6ailej1/image/upload/v1648528448/kisspng-hoodie-t-shirt-sweater-top-october-s-very-own-5afdfb8d57ab65.9085175115265944453591_zqyuh9.png",
-  long: "https://res.cloudinary.com/dc6ailej1/image/upload/v1648522611/kisspng-t-shirt-polo-shirt-clothing-top-neck-5ace24beb4ae37.3365356515234592627401_kgiz0l.png",
+    "https://res.cloudinary.com/dc6ailej1/image/upload/v1649537560/front_hoodie_black_faquxa.jpg",
+  hoodieNoZip: "https://res.cloudinary.com/dc6ailej1/image/upload/v1649537564/front_hoodie_nozipper_black_p93jop.jpg",
 };
 
 const backItemURLs = {
-  short: "https://res.cloudinary.com/dc6ailej1/image/upload/v1648660396/Daco_2183638_e3vt5b.png",
-  hoodie: "https://res.cloudinary.com/dc6ailej1/image/upload/v1648660645/classic-pink-pink-hoodie-back-template-clothing-apparel-sweater-sweatshirt-transparent-png-886125_gylfq1.png",
-  long: "https://res.cloudinary.com/dc6ailej1/image/upload/v1648660523/long-sleeve-shirt-gildan-long-sleeve-back-clothing-apparel-person-human-transparent-png-905625_snmebc.png"
+  short: "https://res.cloudinary.com/dc6ailej1/image/upload/v1649537560/back_tshirt_short_black_lpxsop.jpg",
+  hoodie: "https://res.cloudinary.com/dc6ailej1/image/upload/v1649537559/back_hoodie_black_vmdsaq.jpg",
+  hoodieNoZip: "https://res.cloudinary.com/dc6ailej1/image/upload/v1649537560/back_hoodie_nozipper_black_bkflm3.jpg"
 }
 export const imgService = {
   uploadPrint,
+  getImgDimensions,
   frontItemURLs,
   backItemURLs
 }
-
 
 async function uploadPrint(print) {
   const formData = new FormData();
@@ -29,4 +30,29 @@ async function uploadPrint(print) {
     formData
   );
   return data;
+};
+
+async function getImgDimensions(url, printType, itemType) {
+  console.log(url, printType, itemType);
+  let printImg = new Image();
+  printImg.src = url;
+  const promise = new Promise((resolve, reject) => {
+    printImg.onload = () => {
+      let { maxHeight, maxWidth } = printData.printLayout[itemType][printType];
+      const ratio = (printImg.height) / (printImg.width);
+      const imgShape = ratio > 1 ? "narrow" : "wide";
+
+      let height;
+      let width;
+      if (imgShape === "narrow") {
+        height = maxHeight;
+        width = height / ratio;
+      } else {
+        width = maxWidth;
+        height = width * ratio;
+      };
+      resolve({ height, width });
+    };
+  })
+  return promise;
 };

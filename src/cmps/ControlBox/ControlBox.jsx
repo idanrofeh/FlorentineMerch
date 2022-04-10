@@ -6,11 +6,12 @@ export function ControlBox({
   changeFunctions,
   toggleIsFront,
   side,
-  items,
+  addItemFromPreview,
   setIsPrintEdit,
+  print,
 }) {
   const changeItemColor = (color) => {
-    const targetObj = { target: { name: "item-color", value: color } };
+    const targetObj = { target: { name: "itemColor", value: color } };
     changeFunctions.handlePreviewChange(targetObj);
   };
 
@@ -19,10 +20,11 @@ export function ControlBox({
       <ControlForm
         side={side}
         preview={preview}
+        print={print}
         changeFunctions={changeFunctions}
         toggleIsFront={toggleIsFront}
         changeItemColor={changeItemColor}
-        items={items}
+        addItemFromPreview={addItemFromPreview}
         setIsPrintEdit={setIsPrintEdit}
       />
       <EditBar
@@ -31,7 +33,7 @@ export function ControlBox({
         changeFunctions={changeFunctions}
         toggleIsFront={toggleIsFront}
         changeItemColor={changeItemColor}
-        items={items}
+        addItemFromPreview={addItemFromPreview}
         setIsPrintEdit={setIsPrintEdit}
       />
     </>

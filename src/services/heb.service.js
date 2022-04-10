@@ -8,8 +8,8 @@ function getItemType(type) {
         case "hoodie":
             hebType = "קפוצ'ון";
             break;
-        case "long":
-            hebType = "שרוול ארוך";
+        case "hoodieNoZip":
+            hebType = "סווטשרט";
             break;
         case "short":
             hebType = "שרוול קצר";

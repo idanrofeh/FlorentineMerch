@@ -8,6 +8,8 @@ export function ControlForm({
   toggleIsFront,
   side,
   setIsPrintEdit,
+  addItemFromPreview,
+  print,
 }) {
   const {
     handleFileChange,
@@ -25,7 +27,7 @@ export function ControlForm({
           handleFileChange={handleFileChange}
           handlePrintChange={handlePrintChange}
           side={side}
-          preview={preview}
+          print={print}
           removeFile={removeFile}
         />
         <PreviewControls
@@ -41,6 +43,7 @@ export function ControlForm({
           onClick={(ev) => {
             //TODO: PRINT IS REQUIRED
             ev.preventDefault();
+            addItemFromPreview();
             setIsPrintEdit(false);
           }}
         >

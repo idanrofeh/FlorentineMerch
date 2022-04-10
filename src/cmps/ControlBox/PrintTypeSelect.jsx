@@ -1,9 +1,9 @@
-export function PrintTypeSelect({ side, handlePrintChange, preview }) {
+export function PrintTypeSelect({ side, handlePrintChange, print }) {
   return (
     <label className="print-type">
       <select
         name="type"
-        value={preview[side + "Print"].type}
+        value={print[side + "Print"]?.type || "normal"}
         onChange={(ev) => handlePrintChange(ev, side + "Print")}
       >
         <option value="normal">רגיל</option>

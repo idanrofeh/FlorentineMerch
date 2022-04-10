@@ -1,4 +1,3 @@
-import { utilService } from "../../services/util.service";
 import { hebService } from "../../services/heb.service.js";
 import { itemData } from "../../data/item";
 
@@ -32,7 +31,7 @@ export function Item({ id, item, handleItemsChange, deleteItem }) {
         >
           {sizes.map((size) => {
             return (
-              <option key={utilService.makeId()} value={size}>
+              <option key={size} value={size}>
                 {size}
               </option>
             );
@@ -46,11 +45,11 @@ export function Item({ id, item, handleItemsChange, deleteItem }) {
           name="type"
           className="types"
           onChange={handleItemsChange}
-          value={item.type}
+          value={item.itemType}
         >
           {types.map((type) => {
             return (
-              <option key={utilService.makeId()} value={type}>
+              <option key={type} value={type}>
                 {hebService.getItemType(type)}
               </option>
             );
@@ -63,13 +62,13 @@ export function Item({ id, item, handleItemsChange, deleteItem }) {
           name="color"
           className="colors"
           onChange={handleItemsChange}
-          value={`${item.color}`}
-          style={{ backgroundColor: item.color }}
+          value={`${item.itemColor}`}
+          style={{ backgroundColor: item.itemColor }}
         >
           {itemColors.map((color) => {
             return (
               <option
-                key={utilService.makeId()}
+                key={color}
                 style={{ backgroundColor: color }}
                 value={color}
               ></option>

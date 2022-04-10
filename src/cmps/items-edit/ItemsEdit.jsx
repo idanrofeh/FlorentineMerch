@@ -12,7 +12,7 @@ export function ItemsEdit({
 }) {
   return (
     <section className="items-edit">
-      <h2>:פריטים</h2>
+      <h2>!אהבת? הוסף את ההדפסה לעוד מוצרים</h2>
       {items.map((item) => (
         <Item
           key={item.id}

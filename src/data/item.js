@@ -1,4 +1,4 @@
-const types = ["hoodie", "long", "short"];
+const types = ["hoodie", "hoodieNoZip", "short"];
 
 const colors = [
     "black",

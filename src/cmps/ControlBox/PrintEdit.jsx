@@ -5,7 +5,7 @@ export function PrintEdit({
   handleFileChange,
   handlePrintChange,
   side,
-  preview,
+  print,
   removeFile,
 }) {
   return (
@@ -18,7 +18,7 @@ export function PrintEdit({
       <PrintTypeSelect
         handlePrintChange={handlePrintChange}
         side={side}
-        preview={preview}
+        print={print}
       />
     </section>
   );

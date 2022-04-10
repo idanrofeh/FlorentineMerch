@@ -1,0 +1,25 @@
+.product-preview {
+  background-color: rgb(255, 255, 255);
+  position: relative;
+  height: 100%;
+  width: 64vh;
+  .item-img-container {
+    height: 100%;
+    width: 100%;
+    .item-img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .print-img-container {
+    transform: translate(-50%, -50%);
+    position: absolute;
+    .print-img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
+.product-preview-rotate {
+  transform: rotateY(180deg);
+}

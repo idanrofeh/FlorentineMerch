@@ -11,7 +11,7 @@ export function PreviewControls({
   return (
     <section className="preview-controls">
       <ItemTypeSelect
-        item={preview.item}
+        itemType={preview.itemType}
         handlePreviewChange={handlePreviewChange}
       />
       <ItemColorList changeItemColor={changeItemColor} />
