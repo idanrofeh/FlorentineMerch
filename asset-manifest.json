@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/FlorentineMerch/static/css/main.22ac9baf.css",
+    "main.js": "/FlorentineMerch/static/js/main.8486a288.js",
+    "index.html": "/FlorentineMerch/index.html",
+    "main.22ac9baf.css.map": "/FlorentineMerch/static/css/main.22ac9baf.css.map",
+    "main.8486a288.js.map": "/FlorentineMerch/static/js/main.8486a288.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.22ac9baf.css",
+    "static/js/main.8486a288.js"
+  ]
+}
