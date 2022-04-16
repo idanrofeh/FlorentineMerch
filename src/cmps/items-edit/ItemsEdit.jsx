@@ -1,28 +1,50 @@
 import { AiOutlinePlus } from "react-icons/ai";
 
 import { Item } from "./Item.jsx";
+import { OrderPrint } from "../CartOrder/OrderPrint";
+import { EditableOrderPrint } from "../items-edit/EditableOrderPrint.jsx";
 
 export function ItemsEdit({
   handleItemsChange,
   items,
   addItem,
-  setIsPrintEdit,
+  setIsPreview,
   deleteItem,
   addToCart,
+  print,
+  setPreview,
+  previewId,
+  handleFileChange,
+  removeFile,
+  handlePrintChange,
+  getPrintDimensions,
 }) {
   return (
     <section className="items-edit">
-      <h2>!אהבת? הוסף את ההדפסה לעוד מוצרים</h2>
+      <h2>! הוסף את ההדפסה לעוד מוצרים מהקטגוריה</h2>
+      <EditableOrderPrint
+        backPrint={print.backPrint}
+        frontPrint={print.frontPrint}
+        handleFileChange={handleFileChange}
+        removeFile={removeFile}
+        handlePrintChange={handlePrintChange}
+        getPrintDimensions={getPrintDimensions}
+      />
+
       {items.map((item) => (
         <Item
+          setIsPreview={setIsPreview}
+          setPreview={setPreview}
           key={item.id}
           id={item.id}
           item={item}
           handleItemsChange={handleItemsChange}
           deleteItem={deleteItem}
+          previewId={previewId}
+          itemsLength={items.length}
         />
       ))}
-      {items.length < 12 && (
+      {items.length < 8 && (
         <button
           className="add"
           onClick={(ev) => {
@@ -42,15 +64,6 @@ export function ItemsEdit({
           }}
         >
           🡠 הוסף לעגלה
-        </button>
-        <button
-          className="edit-nav-btn right"
-          onClick={(ev) => {
-            ev.preventDefault();
-            setIsPrintEdit(true);
-          }}
-        >
-          חזור אחורה 🡢
         </button>
       </div>
     </section>

@@ -7,9 +7,9 @@ const printLayout = {
             maxWidth: 30
         },
         big: {
-            top: "43%",
-            left: "51%",
-            maxHeight: 40,
+            top: "50%",
+            left: "43%",
+            maxHeight: 50,
             maxWidth: 43
         },
         pocket: {

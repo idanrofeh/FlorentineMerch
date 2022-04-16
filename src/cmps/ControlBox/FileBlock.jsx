@@ -13,26 +13,26 @@ export function FileBlock({ handleFileChange, removeFile, side }) {
     } else {
       backFile.current.value = "";
     }
-    removeFile();
+    removeFile(side);
   };
 
   return (
-    <div className="file-block">
-      <label htmlFor="file-upload" className="custom-file-upload">
+    <div className="file-block ">
+      <label htmlFor={"file-upload " + side} className="custom-file-upload">
         העלה קובץ
       </label>
       <button onClick={handleRemove}>הסר קובץ</button>
       {side === "front" && (
         <FileInput
           myRef={frontFile}
-          side={side}
+          side="front"
           handleFileChange={handleFileChange}
         />
       )}
-      {side !== "front" && (
+      {side === "back" && (
         <FileInput
           myRef={backFile}
-          side={side}
+          side="back"
           handleFileChange={handleFileChange}
         />
       )}

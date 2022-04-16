@@ -1,26 +1,31 @@
-export function PrintDetails({ print, side }) {
+import { useEffect, useState } from "react";
+
+import { hebService } from "../../services/heb.service";
+import { PrintTypeSelect } from "../ControlBox/PrintTypeSelect";
+
+export function PrintDetails({
+  print,
+  side,
+  isCart,
+  handlePrintChange,
+  getPrintDimensions,
+}) {
+  const [dimensions, setDimensions] = useState({});
+  useEffect(async () => {
+    const { height, width } = await getPrintDimensions(
+      null,
+      print.url,
+      null,
+      50,
+      50
+    );
+    setDimensions({ height, width });
+  }, [print.url]);
   const title = side === "front" ? "הדפסה קדמית" : "הדפסה אחורית";
 
-  let type;
-  if (print) {
-    switch (print.type) {
-      case "pocket":
-        type = "כיס";
-        break;
-      case "normal":
-        type = "רגיל";
-        break;
-      case "big":
-        type = "גדול";
-        break;
-      default:
-        return;
-    }
-  }
-
-  if (!print)
+  if (!print || !print.url)
     return (
-      <section className={"print-details " + side}>
+      <section className={"print-details empty-print-details " + side}>
         <div className="print-title">{title}</div>
         <span>לא נבחר קובץ</span>
       </section>
@@ -28,8 +33,21 @@ export function PrintDetails({ print, side }) {
   return (
     <section className={"print-details " + side}>
       <div className="print-title">{title}</div>
-      <img height={30} width={50} src={print.url} />
-      <div className="print-type">{type}</div>
+      <img
+        height={dimensions?.height}
+        width={dimensions?.width}
+        src={print.url}
+      />
+      {isCart && (
+        <div className="print-type">{hebService.getPrintType(print.type)}</div>
+      )}
+      {!isCart && (
+        <PrintTypeSelect
+          side={side}
+          print={print}
+          handlePrintChange={handlePrintChange}
+        />
+      )}
     </section>
   );
 }

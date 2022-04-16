@@ -15,7 +15,11 @@ export function CartOrder({ order, removeOrder }) {
         }}
         className="order-preview"
       >
-        <OrderPrint backPrint={backPrint} frontPrint={frontPrint} />
+        <OrderPrint
+          backPrint={backPrint}
+          frontPrint={frontPrint}
+          isCart={true}
+        />
         <ItemList items={items} />
       </div>
       <button onClick={() => removeOrder(order.id)}>X</button>

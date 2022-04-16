@@ -7,8 +7,9 @@ export function ControlBox({
   toggleIsFront,
   side,
   addItemFromPreview,
-  setIsPrintEdit,
+  setIsPreview,
   print,
+  items,
 }) {
   const changeItemColor = (color) => {
     const targetObj = { target: { name: "itemColor", value: color } };
@@ -18,6 +19,7 @@ export function ControlBox({
   return (
     <>
       <ControlForm
+        items={items}
         side={side}
         preview={preview}
         print={print}
@@ -25,7 +27,7 @@ export function ControlBox({
         toggleIsFront={toggleIsFront}
         changeItemColor={changeItemColor}
         addItemFromPreview={addItemFromPreview}
-        setIsPrintEdit={setIsPrintEdit}
+        setIsPreview={setIsPreview}
       />
       <EditBar
         side={side}
@@ -34,8 +36,17 @@ export function ControlBox({
         toggleIsFront={toggleIsFront}
         changeItemColor={changeItemColor}
         addItemFromPreview={addItemFromPreview}
-        setIsPrintEdit={setIsPrintEdit}
+        setIsPreview={setIsPreview}
+        items={items}
       />
+      <div className="desktop-control-box">
+        <button
+          className={"side-btn" + (side === "front" ? "" : " rotated")}
+          onClick={toggleIsFront}
+        >
+          החלף צד
+        </button>
+      </div>
     </>
   );
 }

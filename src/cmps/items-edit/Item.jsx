@@ -1,18 +1,32 @@
 import { hebService } from "../../services/heb.service.js";
 import { itemData } from "../../data/item";
 
-export function Item({ id, item, handleItemsChange, deleteItem }) {
+export function Item({
+  id,
+  item,
+  handleItemsChange,
+  deleteItem,
+  setIsPreview,
+  setPreview,
+  previewId,
+  itemsLength,
+}) {
   const sizes = ["S", "M", "L"];
-  const types = ["short", "long", "hoodie"];
+  const types = ["short", "hoodieNoZip", "hoodie"];
   const itemColors = itemData.colors;
-
+  const selectedClass = item.id === previewId ? "selected" : "";
   return (
-    <section className="item">
+    <section
+      className={"item " + selectedClass}
+      onClick={() => {
+        setPreview({ ...item });
+      }}
+    >
       <label>
         <input
           className="num"
           type="number"
-          min="1"
+          min="20"
           name="amount"
           id={id}
           onChange={handleItemsChange}
@@ -42,7 +56,7 @@ export function Item({ id, item, handleItemsChange, deleteItem }) {
       <label>
         <select
           id={id}
-          name="type"
+          name="itemType"
           className="types"
           onChange={handleItemsChange}
           value={item.itemType}
@@ -55,11 +69,12 @@ export function Item({ id, item, handleItemsChange, deleteItem }) {
             );
           })}
         </select>
+        <span>:סוג פריט</span>
       </label>
       <label>
         <select
           id={id}
-          name="color"
+          name="itemColor"
           className="colors"
           onChange={handleItemsChange}
           value={`${item.itemColor}`}
@@ -77,16 +92,18 @@ export function Item({ id, item, handleItemsChange, deleteItem }) {
         </select>
         <span> :צבע פריט</span>
       </label>
-      <button
-        className="remove"
-        id={id}
-        onClick={(ev) => {
-          ev.preventDefault();
-          deleteItem(ev);
-        }}
-      >
-        X
-      </button>
+      {Boolean(itemsLength > 1) && (
+        <button
+          className="remove"
+          id={id}
+          onClick={(ev) => {
+            ev.preventDefault();
+            deleteItem(ev);
+          }}
+        >
+          X
+        </button>
+      )}
     </section>
   );
 }

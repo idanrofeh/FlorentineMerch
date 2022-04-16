@@ -31,30 +31,41 @@ function _OrderEdit({ cart, updateCart }) {
   };
 
   const [preview, setPreview] = useState(null);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState([{ ...blankItem, id: "123" }]);
   const [isFront, setIsFront] = useState(true);
-  const [isPrintEdit, setIsPrintEdit] = useState(true);
+  const [isPreview, setIsPreview] = useState(true);
   const [print, setPrint] = useState({
     frontPrint: { type: "normal" },
     backPrint: { type: "normal" },
   });
 
+  // useEffect(() => {
+  //   console.log("print", print);
+  // }, [print]);
+
+  useEffect(() => {
+    if (items.length) {
+      const { itemType, itemColor, id } = items[items.length - 1];
+      setPreview({ itemColor, itemType, id });
+    } else setPreview(newPreview);
+  }, [items.length]);
+
   useEffect(() => {
     const orderToSet = cart.find((order) => order.id === orderId);
     if (orderToSet) {
       setOrderToUpdate(orderToSet);
-      setIsPrintEdit(false);
-    } else {
-      setPreview(newPreview);
+      setIsPreview(false);
     }
+    setPreview({ ...newPreview, id: "123" });
   }, []);
 
   const setOrderToUpdate = (order) => {
-    let { backPrint, frontPrint } = order;
+    let { backPrint } = order;
+    let { frontPrint } = order;
     if (!backPrint) backPrint = { type: "normal" };
     if (!frontPrint) frontPrint = { type: "normal" };
     setItems(order.items);
-    setPreview({ ...newPreview, backPrint, frontPrint });
+    setPrint({ backPrint, frontPrint });
   };
 
   const handlePreviewChange = ({ target }) => {
@@ -94,14 +105,23 @@ function _OrderEdit({ cart, updateCart }) {
       newCurrPrint = { ...print[side], [name]: value };
     }
     const newPrint = { ...print, [side]: newCurrPrint };
+    console.log(newPrint);
     setPrint(newPrint);
   };
 
-  const getPrintDimensions = async (printType, url, itemType) => {
+  const getPrintDimensions = async (
+    printType,
+    url,
+    itemType,
+    maxHeight,
+    maxWidth
+  ) => {
     const dimensions = await imgService.getImgDimensions(
       url,
       printType,
-      itemType
+      itemType,
+      maxHeight,
+      maxWidth
     );
     return dimensions;
   };
@@ -113,10 +133,11 @@ function _OrderEdit({ cart, updateCart }) {
     const updatedItems = items.map((item) =>
       item.id === id ? { ...item, [name]: value } : item
     );
+    setPreview({ ...preview, [name]: value });
     setItems(updatedItems);
   };
 
-  const removeFile = () => {
+  const removeFile = (side) => {
     const currPrint = side === "front" ? "frontPrint" : "backPrint";
     const newPrint = { type: "normal" };
     setPrint({ ...print, [currPrint]: newPrint });
@@ -143,15 +164,21 @@ function _OrderEdit({ cart, updateCart }) {
   };
 
   const addItemFromPreview = () => {
-    const { itemColor, itemType } = preview;
-    const newItem = {
+    const { itemColor, itemType, id } = preview;
+    let newItem = {
       ...blankItem,
       itemColor,
       itemType,
-      id: utilService.makeId(),
+      id,
     };
     let newItems = [...items];
-    newItems.push(newItem);
+    if (id) {
+      newItems = newItems.map((item) => (item.id === id ? newItem : item));
+    } else {
+      newItem.id = utilService.makeId();
+      newItems.push(newItem);
+    }
+
     setItems(newItems);
   };
 
@@ -172,12 +199,13 @@ function _OrderEdit({ cart, updateCart }) {
   };
 
   const getOrderForCart = () => {
-    const { backPrint, frontPrint } = preview;
+    const { backPrint } = print;
+    const { frontPrint } = print;
     let newOrder = {
       items,
     };
-    if (backPrint.url) newOrder.backPrint = backPrint;
-    if (frontPrint.url) newOrder.frontPrint = frontPrint;
+    if (backPrint?.url) newOrder.backPrint = backPrint;
+    if (frontPrint?.url) newOrder.frontPrint = frontPrint;
     return newOrder;
   };
 
@@ -189,31 +217,34 @@ function _OrderEdit({ cart, updateCart }) {
   const side = isFront ? "front" : "back";
   return (
     <section className="order-edit page">
-      {isPrintEdit && (
-        <div className={(side === "front" ? "" : "rotated") + " order-editor"}>
-          <ProductPreview side={side} preview={preview} print={print} />
-          <ControlBox
-            side={side}
-            preview={preview}
-            print={print}
-            changeFunctions={changeFunctions}
-            toggleIsFront={toggleIsFront}
-            setIsPrintEdit={setIsPrintEdit}
-            addItemFromPreview={addItemFromPreview}
-          />
-        </div>
-      )}
-      {!isPrintEdit && (
-        <ItemsEdit
-          handleItemsChange={handleItemsChange}
+      <ItemsEdit
+        getPrintDimensions={getPrintDimensions}
+        handleItemsChange={handleItemsChange}
+        items={items}
+        addItem={addItem}
+        setIsPreview={setIsPreview}
+        deleteItem={deleteItem}
+        addToCart={addToCart}
+        print={print}
+        setPreview={setPreview}
+        previewId={preview.id}
+        handleFileChange={handleFileChange}
+        removeFile={removeFile}
+        handlePrintChange={handlePrintChange}
+      />
+      <div className={(side === "front" ? "" : "rotated") + " order-editor"}>
+        <ProductPreview side={side} preview={preview} print={print} />
+        <ControlBox
           items={items}
-          addItem={addItem}
-          setIsPrintEdit={setIsPrintEdit}
-          deleteItem={deleteItem}
-          addToCart={addToCart}
+          side={side}
+          preview={preview}
           print={print}
+          changeFunctions={changeFunctions}
+          toggleIsFront={toggleIsFront}
+          setIsPreview={setIsPreview}
+          addItemFromPreview={addItemFromPreview}
         />
-      )}
+      </div>
     </section>
   );
 }

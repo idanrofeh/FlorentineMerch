@@ -2,8 +2,18 @@
   display: flex;
   flex-direction: column;
   padding: 10px;
+  padding-bottom: 0;
   align-items: center;
+  height: 115px;
+  justify-content: space-between;
   .print-title {
-    margin-bottom: 8px;
+    margin-bottom: 3px;
+  }
+}
+
+.empty-print-details {
+  justify-content: initial;
+  span {
+    margin-top: 30%;
   }
 }

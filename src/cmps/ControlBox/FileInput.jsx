@@ -1,8 +1,8 @@
-export function FileInput({ side, handleFileChange, myRef }) {
+export function FileInput({ myRef, handleFileChange, side }) {
   return (
     <input
       ref={myRef}
-      id="file-upload"
+      id={"file-upload " + side}
       type="file"
       name={side + "Print"}
       accept="image/png, image/jpg, image/jpeg"

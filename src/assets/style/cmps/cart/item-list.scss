@@ -1,6 +1,9 @@
 .item-list {
   align-items: center;
   display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  flex-wrap: wrap;
   .order-item {
     cursor: pointer;
     display: flex;

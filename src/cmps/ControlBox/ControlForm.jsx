@@ -7,9 +7,10 @@ export function ControlForm({
   changeFunctions,
   toggleIsFront,
   side,
-  setIsPrintEdit,
+  setIsPreview,
   addItemFromPreview,
   print,
+  items,
 }) {
   const {
     handleFileChange,
@@ -23,13 +24,15 @@ export function ControlForm({
   return (
     <form className={"control-form" + rotationClass}>
       <div className="form-inputs">
-        <PrintEdit
-          handleFileChange={handleFileChange}
-          handlePrintChange={handlePrintChange}
-          side={side}
-          print={print}
-          removeFile={removeFile}
-        />
+        {Boolean(items.length <= 1) && (
+          <PrintEdit
+            handleFileChange={handleFileChange}
+            handlePrintChange={handlePrintChange}
+            side={side}
+            print={print}
+            removeFile={removeFile}
+          />
+        )}
         <PreviewControls
           preview={preview}
           handlePreviewChange={handlePreviewChange}
@@ -44,7 +47,7 @@ export function ControlForm({
             //TODO: PRINT IS REQUIRED
             ev.preventDefault();
             addItemFromPreview();
-            setIsPrintEdit(false);
+            setIsPreview(false);
           }}
         >
           🡠 הוסף פריט

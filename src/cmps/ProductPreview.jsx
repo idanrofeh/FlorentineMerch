@@ -3,7 +3,6 @@ import { printData } from "../data/print.js";
 
 export function ProductPreview({ side, preview, print }) {
   const currPrint = print[side + "Print"];
-  console.log(currPrint);
   const { itemType } = preview;
   const printType = currPrint.type;
   const currPrintData = printData.printLayout[itemType][printType];
@@ -26,7 +25,7 @@ export function ProductPreview({ side, preview, print }) {
       )}
       <div className="item-img-container">
         <img
-          className="item-img"
+          className={"item-img " + preview.itemColor}
           src={imgService[side + "ItemURLs"][preview.itemType] || ""}
         ></img>
       </div>

@@ -3,22 +3,16 @@ import { printData } from '../data/print';
 
 const frontItemURLs = {
   short:
-    "https://res.cloudinary.com/dc6ailej1/image/upload/v1649537460/front_tshirt_short_black_swldjz.jpg",
+    "https://res.cloudinary.com/dc6ailej1/image/upload/v1650065096/front_short_sleeve_ughxnq.png",
   hoodie:
-    "https://res.cloudinary.com/dc6ailej1/image/upload/v1649537560/front_hoodie_black_faquxa.jpg",
-  hoodieNoZip: "https://res.cloudinary.com/dc6ailej1/image/upload/v1649537564/front_hoodie_nozipper_black_p93jop.jpg",
+    "https://res.cloudinary.com/dc6ailej1/image/upload/v1650065096/front_hoodie_akuhe8.png",
+  hoodieNoZip: "https://res.cloudinary.com/dc6ailej1/image/upload/v1650065096/front_hoodie_no_zip_zyon3h.png",
 };
 
 const backItemURLs = {
-  short: "https://res.cloudinary.com/dc6ailej1/image/upload/v1649537560/back_tshirt_short_black_lpxsop.jpg",
-  hoodie: "https://res.cloudinary.com/dc6ailej1/image/upload/v1649537559/back_hoodie_black_vmdsaq.jpg",
-  hoodieNoZip: "https://res.cloudinary.com/dc6ailej1/image/upload/v1649537560/back_hoodie_nozipper_black_bkflm3.jpg"
-}
-export const imgService = {
-  uploadPrint,
-  getImgDimensions,
-  frontItemURLs,
-  backItemURLs
+  short: "https://res.cloudinary.com/dc6ailej1/image/upload/v1650065095/back_short_sleeve_zdfpia.png",
+  hoodie: "https://res.cloudinary.com/dc6ailej1/image/upload/v1650065096/back_hoodie_vy1dsj.png",
+  hoodieNoZip: "https://res.cloudinary.com/dc6ailej1/image/upload/v1650065096/back_hoodie_no_zip_jpi8ye.png"
 }
 
 async function uploadPrint(print) {
@@ -32,13 +26,13 @@ async function uploadPrint(print) {
   return data;
 };
 
-async function getImgDimensions(url, printType, itemType) {
-  console.log(url, printType, itemType);
+async function getImgDimensions(url, printType, itemType, maxHeight, maxWidth) {
   let printImg = new Image();
   printImg.src = url;
   const promise = new Promise((resolve, reject) => {
     printImg.onload = () => {
-      let { maxHeight, maxWidth } = printData.printLayout[itemType][printType];
+      if (!maxHeight) maxHeight = printData.printLayout[itemType][printType].maxHeight;
+      if (!maxWidth) maxWidth = printData.printLayout[itemType][printType].maxWidth;
       const ratio = (printImg.height) / (printImg.width);
       const imgShape = ratio > 1 ? "narrow" : "wide";
 
@@ -56,3 +50,10 @@ async function getImgDimensions(url, printType, itemType) {
   })
   return promise;
 };
+
+export const imgService = {
+  uploadPrint,
+  getImgDimensions,
+  frontItemURLs,
+  backItemURLs
+}

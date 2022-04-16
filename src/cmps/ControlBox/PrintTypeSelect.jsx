@@ -3,7 +3,7 @@ export function PrintTypeSelect({ side, handlePrintChange, print }) {
     <label className="print-type">
       <select
         name="type"
-        value={print[side + "Print"]?.type || "normal"}
+        value={print.type || "normal"}
         onChange={(ev) => handlePrintChange(ev, side + "Print")}
       >
         <option value="normal">רגיל</option>

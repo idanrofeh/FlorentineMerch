@@ -1,8 +1,8 @@
 .product-preview {
   background-color: rgb(255, 255, 255);
   position: relative;
-  height: 100%;
-  width: 64vh;
+  height: 92%;
+  width: 76.5vh;
   .item-img-container {
     height: 100%;
     width: 100%;
@@ -14,6 +14,7 @@
   .print-img-container {
     transform: translate(-50%, -50%);
     position: absolute;
+    z-index: 2;
     .print-img {
       height: 100%;
       width: 100%;
@@ -22,4 +23,40 @@
 }
 .product-preview-rotate {
   transform: rotateY(180deg);
+}
+
+//FILTERS
+.item-img-container {
+  .orange {
+    filter: invert(10%) sepia(50%) saturate(2000%) hue-rotate(10deg)
+      brightness(190%) contrast(100%);
+  }
+  .purple {
+    filter: invert(10%) sepia(50%) saturate(400%) hue-rotate(270deg)
+      brightness(110%) contrast(100%);
+  }
+  .red {
+    filter: invert(10%) sepia(56%) saturate(4418%) hue-rotate(0deg)
+      brightness(108%) contrast(104%);
+  }
+  .green {
+    filter: invert(2.5%) sepia(70%) saturate(5766%) hue-rotate(164deg)
+      brightness(69%) contrast(107%);
+  }
+  .yellow {
+    filter: invert(10%) sepia(50%) saturate(2000%) hue-rotate(10deg)
+      brightness(390%) contrast(100%);
+  }
+  .pink {
+    filter: invert(10%) sepia(50%) saturate(2000%) hue-rotate(-30deg)
+      brightness(390%) contrast(100%);
+  }
+  .blue {
+    filter: invert(10%) sepia(50%) saturate(800%) hue-rotate(190deg)
+      brightness(150%) contrast(100%);
+  }
+  .grey {
+    filter: invert(7%) sepia(10%) saturate(9%) hue-rotate(20deg)
+      brightness(151%) contrast(80%);
+  }
 }
