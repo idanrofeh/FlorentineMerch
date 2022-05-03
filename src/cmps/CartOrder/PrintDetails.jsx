@@ -12,15 +12,9 @@ export function PrintDetails({
 }) {
   const [dimensions, setDimensions] = useState({});
   useEffect(async () => {
-    const { height, width } = await getPrintDimensions(
-      null,
-      print.url,
-      null,
-      50,
-      50
-    );
-    setDimensions({ height, width });
-  }, [print.url]);
+    const dimensions = await getPrintDimensions(null, print?.url, null, 50, 50);
+    setDimensions(dimensions);
+  }, [print?.url]);
   const title = side === "front" ? "הדפסה קדמית" : "הדפסה אחורית";
 
   if (!print || !print.url)

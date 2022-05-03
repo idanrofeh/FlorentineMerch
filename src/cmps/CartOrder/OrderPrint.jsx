@@ -1,3 +1,5 @@
+import { imgService } from "../../services/img.service.js";
+
 import { PrintDetails } from "./PrintDetails.jsx";
 import { FileBlock } from "../ControlBox/FileBlock.jsx";
 
@@ -8,10 +10,31 @@ export function OrderPrint({
   handleFileChange,
   removeFile,
 }) {
+  const getPrintDimensions = async (
+    printType,
+    url,
+    itemType,
+    maxHeight,
+    maxWidth
+  ) => {
+    const dimensions = await imgService.getImgDimensions(
+      url,
+      printType,
+      itemType,
+      maxHeight,
+      maxWidth
+    );
+    return dimensions;
+  };
   return (
     <section className="order-print">
       <div>
-        <PrintDetails print={frontPrint} side="front" />
+        <PrintDetails
+          print={frontPrint}
+          side="front"
+          getPrintDimensions={getPrintDimensions}
+          isCart={true}
+        />
         {!isCart && (
           <FileBlock
             handleFileChange={handleFileChange}
@@ -21,7 +44,12 @@ export function OrderPrint({
         )}
       </div>
       <div>
-        <PrintDetails print={backPrint} side="back" />
+        <PrintDetails
+          print={backPrint}
+          side="back"
+          getPrintDimensions={getPrintDimensions}
+          isCart={true}
+        />
         {!isCart && (
           <FileBlock
             handleFileChange={handleFileChange}

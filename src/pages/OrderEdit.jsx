@@ -39,10 +39,6 @@ function _OrderEdit({ cart, updateCart }) {
     backPrint: { type: "normal" },
   });
 
-  // useEffect(() => {
-  //   console.log("print", print);
-  // }, [print]);
-
   useEffect(() => {
     if (items.length) {
       const { itemType, itemColor, id } = items[items.length - 1];
@@ -105,7 +101,6 @@ function _OrderEdit({ cart, updateCart }) {
       newCurrPrint = { ...print[side], [name]: value };
     }
     const newPrint = { ...print, [side]: newCurrPrint };
-    console.log(newPrint);
     setPrint(newPrint);
   };
 

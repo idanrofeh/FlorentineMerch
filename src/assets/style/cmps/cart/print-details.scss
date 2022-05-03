@@ -3,6 +3,7 @@
   flex-direction: column;
   padding: 10px;
   padding-bottom: 0;
+  padding-top: 3px;
   align-items: center;
   height: 115px;
   justify-content: space-between;
@@ -14,6 +15,6 @@
 .empty-print-details {
   justify-content: initial;
   span {
-    margin-top: 30%;
+    margin-top: 20%;
   }
 }

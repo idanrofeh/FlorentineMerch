@@ -2,15 +2,15 @@ const printLayout = {
     short: {
         normal: {
             top: "36%",
-            left: "51%",
+            left: "50%",
             maxHeight: 24,
             maxWidth: 30
         },
         big: {
             top: "50%",
-            left: "43%",
+            left: "50%",
             maxHeight: 50,
-            maxWidth: 43
+            maxWidth: 40
         },
         pocket: {
             top: "30%",
@@ -21,16 +21,16 @@ const printLayout = {
     },
     hoodieNoZip: {
         normal: {
-            top: "48%",
-            left: "48%",
+            top: "53%",
+            left: "50%",
             maxHeight: 24,
             maxWidth: 30
         },
         big: {
             top: "50%",
-            left: "49%",
+            left: "50%",
             maxHeight: 40,
-            maxWidth: 43
+            maxWidth: 36
         },
         pocket: {
             top: "41%",
@@ -41,8 +41,8 @@ const printLayout = {
     },
     hoodie: {
         normal: {
-            top: "48%",
-            left: "48%",
+            top: "53%",
+            left: "50%",
             maxHeight: 24,
             maxWidth: 30
         },
@@ -50,7 +50,7 @@ const printLayout = {
             top: "50%",
             left: "50%",
             maxHeight: 40,
-            maxWidth: 43
+            maxWidth: 36
         },
         pocket: {
             top: "41%",
