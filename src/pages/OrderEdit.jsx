@@ -7,6 +7,7 @@ import { updateCart } from "../store/actions/cart-actions.js";
 
 import { imgService } from "../services/img.service.js";
 import { utilService } from "../services/util.service.js";
+import { printData } from "../data/print.js";
 
 import { ProductPreview } from "../cmps/ProductPreview.jsx";
 import { ControlBox } from "../cmps/ControlBox/ControlBox.jsx";
@@ -31,9 +32,13 @@ function _OrderEdit({ cart, updateCart }) {
   };
 
   const [preview, setPreview] = useState(null);
+
   const [items, setItems] = useState([{ ...blankItem, id: "123" }]);
+
   const [isFront, setIsFront] = useState(true);
+
   const [isPreview, setIsPreview] = useState(true);
+
   const [print, setPrint] = useState({
     frontPrint: { type: "normal" },
     backPrint: { type: "normal" },
@@ -54,6 +59,15 @@ function _OrderEdit({ cart, updateCart }) {
     }
     setPreview({ ...newPreview, id: "123" });
   }, []);
+
+  useEffect(() => {
+    logPrintPrice();
+  }, [print]);
+
+  const logPrintPrice = async () => {
+    const printPrice = await printData.getPrintPrice(print);
+    console.log("printPrice: ", printPrice);
+  };
 
   const setOrderToUpdate = (order) => {
     let { backPrint } = order;
