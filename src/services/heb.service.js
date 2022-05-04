@@ -6,10 +6,10 @@ export const hebService = {
 function getItemType(type) {
     let hebType;
     switch (type) {
-        case "hoodie":
+        case "hoodieNoZip":
             hebType = "קפוצ'ון";
             break;
-        case "hoodieNoZip":
+        case "hoodie":
             hebType = "סווטשרט";
             break;
         case "short":

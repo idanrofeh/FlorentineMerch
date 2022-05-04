@@ -9,10 +9,10 @@ const printLayout = {
             maxWidth: 30
         },
         big: {
-            top: "50%",
+            top: "40%",
             left: "50%",
-            maxHeight: 50,
-            maxWidth: 40
+            maxHeight: 35,
+            maxWidth: 35
         },
         pocket: {
             top: "30%",
@@ -31,8 +31,8 @@ const printLayout = {
         big: {
             top: "50%",
             left: "50%",
-            maxHeight: 40,
-            maxWidth: 36
+            maxHeight: 30,
+            maxWidth: 30
         },
         pocket: {
             top: "41%",
@@ -49,10 +49,10 @@ const printLayout = {
             maxWidth: 30
         },
         big: {
-            top: "50%",
+            top: "55%",
             left: "50%",
-            maxHeight: 40,
-            maxWidth: 36
+            maxHeight: 32,
+            maxWidth: 32
         },
         pocket: {
             top: "41%",

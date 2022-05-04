@@ -4,9 +4,9 @@ import { printData } from '../data/print';
 const frontItemURLs = {
   short:
     "https://res.cloudinary.com/dc6ailej1/image/upload/v1650065096/front_short_sleeve_ughxnq.png",
-  hoodie:
+  hoodieNoZip:
     "https://res.cloudinary.com/dc6ailej1/image/upload/v1650065096/front_hoodie_akuhe8.png",
-  hoodieNoZip: "https://res.cloudinary.com/dc6ailej1/image/upload/v1650065096/front_hoodie_no_zip_zyon3h.png",
+  hoodie: "https://res.cloudinary.com/dc6ailej1/image/upload/v1650065096/front_hoodie_no_zip_zyon3h.png",
 };
 
 const backItemURLs = {

@@ -8,6 +8,7 @@ import { updateCart } from "../store/actions/cart-actions.js";
 import { imgService } from "../services/img.service.js";
 import { utilService } from "../services/util.service.js";
 import { printData } from "../data/print.js";
+import { itemData } from "../data/item.js";
 
 import { ProductPreview } from "../cmps/ProductPreview.jsx";
 import { ControlBox } from "../cmps/ControlBox/ControlBox.jsx";
@@ -23,13 +24,14 @@ function _OrderEdit({ cart, updateCart }) {
     size: "M",
     amount: 20,
     itemType: "short",
+    price: 20,
   };
 
-  const newPreview = {
-    priceForOne: 40,
-    itemColor: "black",
-    itemType: "short",
-  };
+  // const newPreview = {
+  //   priceForOne: 40,
+  //   itemColor: "black",
+  //   itemType: "short",
+  // };
 
   const [preview, setPreview] = useState(null);
 
@@ -48,7 +50,7 @@ function _OrderEdit({ cart, updateCart }) {
     if (items.length) {
       const { itemType, itemColor, id } = items[items.length - 1];
       setPreview({ itemColor, itemType, id });
-    } else setPreview(newPreview);
+    } else setPreview(blankItem);
   }, [items.length]);
 
   useEffect(() => {
@@ -57,16 +59,21 @@ function _OrderEdit({ cart, updateCart }) {
       setOrderToUpdate(orderToSet);
       setIsPreview(false);
     }
-    setPreview({ ...newPreview, id: "123" });
+    setPreview({ ...blankItem, id: "123" });
   }, []);
 
   useEffect(() => {
-    logPrintPrice();
-  }, [print]);
+    setPrintPrice();
+  }, [
+    print.backPrint.url,
+    print.frontPrint.url,
+    print.backPrint.type,
+    print.frontPrint.type,
+  ]);
 
-  const logPrintPrice = async () => {
+  const setPrintPrice = async () => {
     const printPrice = await printData.getPrintPrice(print);
-    console.log("printPrice: ", printPrice);
+    setPrint({ ...print, price: printPrice });
   };
 
   const setOrderToUpdate = (order) => {
@@ -139,9 +146,16 @@ function _OrderEdit({ cart, updateCart }) {
     const { name, id } = target;
     let { value } = target;
     if (target.type === "number") value = +value;
-    const updatedItems = items.map((item) =>
+    let updatedItems = items.map((item) =>
       item.id === id ? { ...item, [name]: value } : item
     );
+    if (name === "itemType") {
+      updatedItems = updatedItems.map((item) => {
+        return item.id === id
+          ? { ...item, price: itemData.prices[item.itemType] }
+          : item;
+      });
+    }
     setPreview({ ...preview, [name]: value });
     setItems(updatedItems);
   };

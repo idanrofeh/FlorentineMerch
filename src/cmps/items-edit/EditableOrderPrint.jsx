@@ -11,32 +11,32 @@ export function EditableOrderPrint({
 }) {
   return (
     <section className="order-print">
-      <div className="front-order-print">
-        <PrintDetails
-          print={frontPrint}
-          isCart={false}
-          side="front"
-          handlePrintChange={handlePrintChange}
-          getPrintDimensions={getPrintDimensions}
-        />
-        <FileBlock
-          handleFileChange={handleFileChange}
-          removeFile={removeFile}
-          side="front"
-        />
-      </div>
       <div className="back-order-print">
         <PrintDetails
           print={backPrint}
           isCart={false}
-          handlePrintChange={handlePrintChange}
           side="back"
+          handlePrintChange={handlePrintChange}
           getPrintDimensions={getPrintDimensions}
         />
         <FileBlock
           handleFileChange={handleFileChange}
           removeFile={removeFile}
           side="back"
+        />
+      </div>
+      <div className="front-order-print">
+        <PrintDetails
+          print={frontPrint}
+          isCart={false}
+          handlePrintChange={handlePrintChange}
+          side="front"
+          getPrintDimensions={getPrintDimensions}
+        />
+        <FileBlock
+          handleFileChange={handleFileChange}
+          removeFile={removeFile}
+          side="front"
         />
       </div>
     </section>
