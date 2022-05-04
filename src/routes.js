@@ -5,15 +5,15 @@ import { About } from "./pages/About.jsx";
 
 export default [
     {
-        path: "/",
+        path: "/FlorentineMerch",
         component: OrderEdit,
     },
     {
-        path: "/cart",
+        path: "/FlorentineMerch/cart",
         component: Cart
     },
     {
-        path: "/about",
+        path: "/FlorentineMerch/about",
         component: About,
     }
 ]
