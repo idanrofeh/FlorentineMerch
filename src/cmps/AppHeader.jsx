@@ -17,7 +17,7 @@ function _AppHeader({ cart }) {
         <NavLink className="header-btn" to="/FlorentineMerch/cart">
           {"עגלה " + (cart.length ? `(${cart.length})` : "")}
         </NavLink>
-        <NavLink className="header-btn" to="/">
+        <NavLink className="header-btn" to="/FlorentineMerch">
           הזמנה חדשה
         </NavLink>
       </div>

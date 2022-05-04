@@ -218,7 +218,7 @@ function _OrderEdit({ cart, updateCart }) {
       newCart.push(newOrder);
     }
     updateCart(newCart);
-    navigate("/cart");
+    navigate("/FlorentineMerch/cart");
   };
 
   const getOrderForCart = () => {
