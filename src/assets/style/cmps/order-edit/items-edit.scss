@@ -25,12 +25,15 @@
     width: 30px;
     padding-top: 5px;
     background-color: white;
-    margin-left: 87%;
     margin-bottom: 10px;
     cursor: pointer;
     &:hover {
       filter: brightness(80%);
     }
+  }
+  .right {
+    display: flex;
+    justify-content: end;
   }
   .nav {
     display: flex;
@@ -43,5 +46,9 @@
         filter: brightness(80%);
       }
     }
+  }
+  .price {
+    font-size: 30px;
+    font-weight: 600;
   }
 }

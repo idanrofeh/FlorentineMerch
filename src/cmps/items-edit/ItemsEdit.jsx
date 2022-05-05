@@ -54,20 +54,19 @@ export function ItemsEdit({
         />
       ))}
       {items.length < 8 && (
-        <button
-          className="add"
-          onClick={(ev) => {
-            ev.preventDefault();
-            addItem();
-          }}
-        >
-          <AiOutlinePlus />
-        </button>
+        <div className="right">
+          <button
+            className="add"
+            onClick={(ev) => {
+              ev.preventDefault();
+              addItem();
+            }}
+          >
+            <AiOutlinePlus />
+          </button>
+        </div>
       )}
       <div className="nav">
-        <div>
-          <span>{getOrderPrice() + "₪"}</span>
-        </div>
         <button
           className="edit-nav-btn left"
           onClick={(ev) => {
@@ -77,6 +76,9 @@ export function ItemsEdit({
         >
           🡠 הוסף לעגלה
         </button>
+        <div>
+          <span className="price">{getOrderPrice() + "₪"}</span>
+        </div>
       </div>
     </section>
   );

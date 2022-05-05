@@ -11,7 +11,7 @@ export function CartOrder({ order, removeOrder }) {
     <section className="cart-order">
       <div
         onClick={() => {
-          navigate(`/?orderId=${order.id}`);
+          navigate(`/FlorentineMerch/?orderId=${order.id}`);
         }}
         className="order-preview"
       >

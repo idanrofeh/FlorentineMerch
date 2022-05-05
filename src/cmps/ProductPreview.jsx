@@ -20,7 +20,10 @@ export function ProductPreview({ side, preview, print }) {
             left,
           }}
         >
-          <img className="print-img" src={currPrint.url}></img>
+          <img
+            className={"print-img " + (side === "back" ? "rotated" : "")}
+            src={currPrint.url}
+          ></img>
         </div>
       )}
       <div className="item-img-container">
