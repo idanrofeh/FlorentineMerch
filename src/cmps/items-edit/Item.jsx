@@ -5,8 +5,7 @@ export function Item({
   id,
   item,
   handleItemsChange,
-  deleteItem,
-  setIsPreview,
+  setMsgId,
   setPreview,
   previewId,
   itemsLength,
@@ -98,7 +97,7 @@ export function Item({
           id={id}
           onClick={(ev) => {
             ev.preventDefault();
-            deleteItem(ev);
+            setMsgId(id);
           }}
         >
           X

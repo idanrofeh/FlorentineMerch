@@ -13,6 +13,7 @@ import { itemData } from "../data/item.js";
 import { ProductPreview } from "../cmps/ProductPreview.jsx";
 import { ControlBox } from "../cmps/ControlBox/ControlBox.jsx";
 import { ItemsEdit } from "../cmps/items-edit/ItemsEdit.jsx";
+import { UserMsg } from "../cmps/UserMsg";
 
 function _OrderEdit({ cart, updateCart }) {
   let navigate = useNavigate();
@@ -27,13 +28,9 @@ function _OrderEdit({ cart, updateCart }) {
     price: 20,
   };
 
-  // const newPreview = {
-  //   priceForOne: 40,
-  //   itemColor: "black",
-  //   itemType: "short",
-  // };
-
   const [preview, setPreview] = useState(null);
+
+  const [msgId, setMsgId] = useState(null);
 
   const [items, setItems] = useState([{ ...blankItem, id: "123" }]);
 
@@ -180,8 +177,7 @@ function _OrderEdit({ cart, updateCart }) {
     setItems(updatedItems);
   };
 
-  const deleteItem = ({ target }) => {
-    const { id } = target;
+  const deleteItem = (id) => {
     const updatedItems = items.filter((item) => item.id !== id);
     setItems(updatedItems);
   };
@@ -229,7 +225,16 @@ function _OrderEdit({ cart, updateCart }) {
     };
     if (backPrint?.url) newOrder.backPrint = backPrint;
     if (frontPrint?.url) newOrder.frontPrint = frontPrint;
+    newOrder.price = getOrderPrice();
     return newOrder;
+  };
+
+  const getOrderPrice = () => {
+    let orderPrice = 0;
+    items.map((item) => {
+      orderPrice += (item?.price + print?.price) * item.amount;
+    });
+    return orderPrice;
   };
 
   const toggleIsFront = () => {
@@ -239,36 +244,46 @@ function _OrderEdit({ cart, updateCart }) {
   if (!preview) return <div className="black">Loading..</div>;
   const side = isFront ? "front" : "back";
   return (
-    <section className="order-edit page">
-      <ItemsEdit
-        getPrintDimensions={getPrintDimensions}
-        handleItemsChange={handleItemsChange}
-        items={items}
-        addItem={addItem}
-        setIsPreview={setIsPreview}
-        deleteItem={deleteItem}
-        addToCart={addToCart}
-        print={print}
-        setPreview={setPreview}
-        previewId={preview.id}
-        handleFileChange={handleFileChange}
-        removeFile={removeFile}
-        handlePrintChange={handlePrintChange}
+    <>
+      <UserMsg
+        yesFunc={deleteItem}
+        whichMsg="item-delete"
+        msgId={msgId}
+        setMsgId={setMsgId}
       />
-      <div className={(side === "front" ? "" : "rotated") + " order-editor"}>
-        <ProductPreview side={side} preview={preview} print={print} />
-        <ControlBox
+      <section className="order-edit page">
+        <ItemsEdit
+          getOrderPrice={getOrderPrice}
+          getPrintDimensions={getPrintDimensions}
+          handleItemsChange={handleItemsChange}
           items={items}
-          side={side}
-          preview={preview}
-          print={print}
-          changeFunctions={changeFunctions}
-          toggleIsFront={toggleIsFront}
+          addItem={addItem}
           setIsPreview={setIsPreview}
-          addItemFromPreview={addItemFromPreview}
+          deleteItem={deleteItem}
+          addToCart={addToCart}
+          print={print}
+          setPreview={setPreview}
+          previewId={preview.id}
+          handleFileChange={handleFileChange}
+          removeFile={removeFile}
+          handlePrintChange={handlePrintChange}
+          setMsgId={setMsgId}
         />
-      </div>
-    </section>
+        <div className={(side === "front" ? "" : "rotated") + " order-editor"}>
+          <ProductPreview side={side} preview={preview} print={print} />
+          <ControlBox
+            items={items}
+            side={side}
+            preview={preview}
+            print={print}
+            changeFunctions={changeFunctions}
+            toggleIsFront={toggleIsFront}
+            setIsPreview={setIsPreview}
+            addItemFromPreview={addItemFromPreview}
+          />
+        </div>
+      </section>
+    </>
   );
 }
 

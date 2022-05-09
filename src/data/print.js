@@ -65,8 +65,8 @@ const printLayout = {
 
 const coloredTypePrice = {
     pocket: 3,
-    normal: 9,
-    big: 16
+    normal: 8,
+    big: 15
 }
 
 async function getPrintPrice(print) {

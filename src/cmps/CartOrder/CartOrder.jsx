@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { OrderPrint } from "./OrderPrint.jsx";
 import { ItemList } from "./ItemList.jsx";
 
-export function CartOrder({ order, removeOrder }) {
+export function CartOrder({ order, setMsgId }) {
   let navigate = useNavigate();
 
-  const { items, backPrint, frontPrint } = order;
+  const { items, backPrint, frontPrint, price } = order;
   return (
     <section className="cart-order">
       <div
@@ -15,6 +15,7 @@ export function CartOrder({ order, removeOrder }) {
         }}
         className="order-preview"
       >
+        <div className="price">{}</div>
         <OrderPrint
           backPrint={backPrint}
           frontPrint={frontPrint}
@@ -22,7 +23,7 @@ export function CartOrder({ order, removeOrder }) {
         />
         <ItemList items={items} />
       </div>
-      <button onClick={() => removeOrder(order.id)}>X</button>
+      <button onClick={() => setMsgId(order.id)}>X</button>
     </section>
   );
 }
